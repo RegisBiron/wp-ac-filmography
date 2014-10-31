@@ -1,0 +1,23 @@
+{
+  "name": "my-boilerplate",
+  "version": "0.1.0",
+  "homepage": "https://github.com/RegisBiron/my-boilerplate",
+  "authors": [
+    "Regis Biron <hello@regisbiron.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "jquery": "~2.1.1"
+  },
+  "dependencies": {
+    "jquery": "~2.1.1",
+    "modernizr": "~2.8.3"
+  }
+}
