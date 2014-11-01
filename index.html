@@ -10,8 +10,8 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <!-- Place favicon.ico in the root directory -->
 
-        <link rel="stylesheet" href="css/main.css">
-        <script src="bower_components/modernizr/modernizr.js"></script>
+        <link rel="stylesheet" href="dev/styles/main.css">
+        <script src="dev/js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -19,14 +19,12 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
+        <h1>Regis Biron &mdash; My Boilerplate</h1>
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <!-- bower:js -->
-        <script src="bower_components/jquery/dist/jquery.js"></script>
-        <!-- endbower -->
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
+        <script>window.jQuery || document.write('<script src="dev/js/vendor/jquery-1.11.1.min.js"><\/script>')</script>
+        <script src="dev/js/plugins.js"></script>
+        <script src="dev/js/main.js"></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>

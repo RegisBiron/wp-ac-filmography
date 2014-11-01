@@ -1,1 +1,20 @@
-.test{}
+/* ==========================================================================
+   Dependencies
+   ========================================================================== */
+
+     @import "dependencies/colors";
+     @import "dependencies/mixins";
+     @import "dependencies/normalize";
+     @import "dependencies/variables";
+
+/* /partials */
+
+/* ==========================================================================
+   Partials
+   ========================================================================== */
+
+	 @import "partials/navigation";
+     @import "partials/header";
+     @import "partials/footer";
+
+/* /partials */

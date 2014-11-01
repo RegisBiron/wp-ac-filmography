@@ -17,19 +17,22 @@ module.exports = function (grunt) {
         config: config,
 
         watch: {
-            bower: {
-                files: ['bower.json'],
-                tasks: ['wiredep']
-            },
             js: {
-                files: ['<%= config.dev %>/scripts/{,*/}*.js'],
+                files: ['<%= config.dev %>/scripts/**/*.js'],
                 options: {
                     livereload: true
                 }
             },
             styles: {
-                files: ['<%= config.dev %>/scss/*.scss'],
+                files: ['<%= config.dev %>/scss/**/*.scss'],
                 tasks: ['sass:dev'],
+                options: {
+                    livereload: true
+                }
+            },
+            autoprefixer: {
+                files: ['.tmp/styles/*.css'],
+                tasks: ['autoprefixer:dev'],
                 options: {
                     livereload: true
                 }
@@ -71,7 +74,7 @@ module.exports = function (grunt) {
                 expand: true,
                 cwd: '<%= config.dev %>/scss/',
                 src: ['*.scss'],
-                dest: '<%= config.dist %>/styles/',
+                dest: '.tmp/styles/',
                 ext: '.css'
             },
             dev: {
@@ -83,8 +86,31 @@ module.exports = function (grunt) {
                 expand: true,
                 cwd: '<%= config.dev %>/scss/',
                 src: ['*.scss'],
-                dest: '<%= config.dev %>/styles/',
+                dest: '.tmp/styles/',
                 ext: '.css'
+            }
+        },
+
+        autoprefixer: {
+            dist: {
+                options: {
+                    browsers: ['last 1 version']
+                },
+                files: {
+                    '<%= config.dist %>/style.css': ['.tmp/styles/style.css']
+                }
+            },
+            dev: {
+                options: {
+                    browsers: ['last 1 version'],
+                    map: true
+                },
+                files: [{
+                    expand: true,
+                    cwd: '.tmp/styles/',
+                    src: '*.css',
+                    dest: '<%= config.dev %>/styles/'
+                }]
             }
         },
 
@@ -105,16 +131,7 @@ module.exports = function (grunt) {
         },
 
         clean: {
-            dist: {
-                src: [".tmp/"]
-            }
-        },
-
-        wiredep: {
-            app: {
-                src: ['index.html'],
-                exclude: ['bower_components/modernizr/modernizr.js']
-            }
+            src: [".tmp/"]
         },
 
         responsive_images: {
@@ -135,6 +152,7 @@ module.exports = function (grunt) {
     grunt.registerTask('dev', function (target) {
 
         grunt.task.run([
+            'clean',
             'connect:livereload',
             'sass:dev',
             'watch'
@@ -146,7 +164,7 @@ module.exports = function (grunt) {
         'sass:dist',
         'concat:dist',
         'uglify:dist',
-        'clean:dist'
+        'clean'
     ]);
 
     grunt.registerTask('default', [
