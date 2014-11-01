@@ -1,19 +1,15 @@
 
 module.exports = function (grunt) {
 
-    // Load grunt tasks automatically
     require('load-grunt-tasks')(grunt);
 
-    // Configurable paths
     var config = {
         dev: 'dev',
         dist: 'dist'
     };
 
-    // Define the configuration for all the tasks
     grunt.initConfig({
 
-        // Project settings
         config: config,
 
         watch: {
