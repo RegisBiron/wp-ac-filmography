@@ -156,11 +156,11 @@ module.exports = function (grunt) {
     });
 
     grunt.registerTask('build', [
+        'clean',
         'responsive_images',
         'sass:dist',
         'concat:dist',
-        'uglify:dist',
-        'clean'
+        'uglify:dist'
     ]);
 
     grunt.registerTask('default', [
