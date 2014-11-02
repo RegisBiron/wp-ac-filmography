@@ -151,6 +151,7 @@ module.exports = function (grunt) {
             'clean',
             'connect:livereload',
             'sass:dev',
+            'autoprefixer:dev',
             'watch'
         ]);
     });
