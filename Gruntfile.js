@@ -38,7 +38,7 @@ module.exports = function (grunt) {
                   livereload: '<%= connect.options.livereload %>'
                 },
                 files: [
-                  '**.html',
+                  '**/*.html',
                   '<%= config.dev %>/scss/*.scss'
                 ]
             }
