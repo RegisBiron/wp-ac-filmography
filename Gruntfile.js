@@ -96,6 +96,7 @@ module.exports = function (grunt) {
                 ext: '.css'
             }
         },
+        
         bake: {
     	    build: {
     	        files: {
