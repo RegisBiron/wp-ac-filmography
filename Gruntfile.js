@@ -26,6 +26,16 @@ module.exports = function (grunt) {
                     livereload: true
                 }
             },
+            bake: {
+                files: [
+                    '<%= config.dev %>/includes/**',
+                    '<%= config.dev %>**/*.html'
+                ],
+                tasks: ["bake:build"],
+                options: {
+                    livereload: true
+                }
+            },
             autoprefixer: {
                 files: ['.tmp/styles/*.css'],
                 tasks: ['autoprefixer:dev'],
@@ -86,6 +96,13 @@ module.exports = function (grunt) {
                 ext: '.css'
             }
         },
+        bake: {
+    	    build: {
+    	        files: {
+    	            "index.html": "dev/base.html"
+    	        }
+    	    }
+    	},
 
         autoprefixer: {
             dist: {
@@ -152,6 +169,7 @@ module.exports = function (grunt) {
             'connect:livereload',
             'sass:dev',
             'autoprefixer:dev',
+            'bake:build',
             'watch'
         ]);
     });
@@ -160,6 +178,7 @@ module.exports = function (grunt) {
         'clean',
         'responsive_images',
         'sass:dist',
+        'bake:build',
         'concat:dist',
         'uglify:dist'
     ]);
