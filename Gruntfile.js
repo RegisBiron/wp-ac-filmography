@@ -31,7 +31,7 @@ module.exports = function (grunt) {
                     '<%= config.dev %>/includes/**',
                     '<%= config.dev %>**/*.html'
                 ],
-                tasks: ["bake:build"],
+                tasks: ['bake:build'],
                 options: {
                     livereload: true
                 }
