@@ -96,11 +96,11 @@ module.exports = function (grunt) {
                 ext: '.css'
             }
         },
-        
+
         bake: {
     	    build: {
     	        files: {
-    	            "index.html": "dev/base.html"
+    	            'index.html': 'dev/base.html'
     	        }
     	    }
     	},
