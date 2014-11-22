@@ -19,12 +19,9 @@ module.exports = function (grunt) {
                     livereload: true
                 }
             },
-            bake: {
-                files: [
-                    '<%= config.dev %>/includes/**',
-                    '<%= config.dev %>**/*.html'
-                ],
-                tasks: ['bake:build'],
+            styles: {
+                files: ['<%= config.dev %>/scss/**/*.scss'],
+                tasks: ['sass:dev'],
                 options: {
                     livereload: true
                 }
@@ -42,7 +39,7 @@ module.exports = function (grunt) {
                 },
                 files: [
                   '**/*.html',
-                  '<%= config.dev %>/scss/*.scss'
+                  '<%= config.dev %>/scss/**/*.scss'
                 ]
             }
         },

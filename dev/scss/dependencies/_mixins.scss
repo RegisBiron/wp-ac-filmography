@@ -1,0 +1,34 @@
+@mixin breakpoint($point) {
+ @if $point == desktop-large {
+    @media (min-width: 90em) { @content; } /* 1440/16 */
+  }
+  @if $point == desktop {
+    @media (min-width: 80em) { @content; } /* 1280/16 */
+  }
+  @else if $point == laptop {
+    @media (min-width: 68.75em) { @content; } /* 1100/16 */
+  }
+  @else if $point == ipad-horiz {
+    @media (min-width: 64em)  { @content; } /* 1024/16 */
+  }
+  @else if $point == ipad-vert {
+    @media (min-width: 48em)  { @content; } /* 768/16 */
+  }
+  @else if $point == small-tablet {
+    @media (min-width: 37.5em)  { @content; } /* 600/16 */
+  }
+  @else if $point == iphone-horiz {
+    @media (min-width: 30em)  { @content; } /* 480/16 */
+  }
+  @else if $point == iphone-vert {
+    @media (min-width: 20em)  { @content; } /* 320/16 */
+  }
+}
+
+%vertical-align {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
