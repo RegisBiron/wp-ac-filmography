@@ -1,14 +1,117 @@
-#wrapper nav{
+nav{
     width: 20%;
+    height: 100%;
     float: left;
+    box-sizing: border-box;
     background: #FFF;
     position: fixed;
     left: 0;
     top: 0;
     bottom: 0;
+    padding: 2.1875em 3.125em 2.1875em 3.125em;
+    //easeInBack
+    transition: all $menuTransition cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
 
-body{
-    color: #000;
-    background: #000;
+#main-menu{
+    float: left;
+    position: absolute;
+    left: -10em;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    //easeInBack
+    transition: all $menuTransition cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+
+#main-menu li{
+    padding-left: 0;
+    a{
+        font-size: (20em / 16);
+        font-weight: 400;
+        line-height: 0.8em;
+        &:hover{
+            color: #979797;
+        }
+        @include breakpoint(ipad-vert){
+            font-size: (30em / 16);
+            line-height: 1.2em;
+        }
+    }
+}
+
+nav.open{
+    width: 100%;
+    //easeOutBack
+    transition: all $menuTransition cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    @include breakpoint(ipad-vert){
+        width: 50%;
+    }
+}
+
+nav.open #main-menu{
+    left: 10%;
+    //easeOutBack
+    transition: all $menuTransition cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    @include breakpoint(ipad-vert){
+        left: 8%;
+    }
+}
+
+nav.open #menu-button,
+nav.open #title{
+    //easeOutBack
+    transition: all $menuTransition cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    left: 80%;
+}
+
+#title{
+    display: block;
+    font: 700 1.125em/1em $mainFont;
+    text-transform: uppercase;
+    position: absolute;
+    left: 50%;
+    cursor: pointer;
+    //easeInBack
+    transition: all $menuTransition cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    span{
+        font-weight: 400;
+        font-size: 0.8em;
+    }
+    //max-width
+    @include breakpoint(ipad-horiz-max){
+        transform: rotate(270deg);
+        width: 8em;
+        margin-left: (8em / 2) * -1;
+        top: (8em / 2 );
+    }
+    //min-width
+    @include breakpoint(ipad-horiz){
+        width: 7.2em;
+        margin-left: (7.2em / 2) * -1;
+        text-align: center;
+        font-size: 1.5em;
+    }
+}
+
+#menu-button{
+    font-size: 0.8em;
+    font-weight: 400;
+    text-transform: uppercase;
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    left: 50%;
+    margin-left: (87em / 16) / 2 * -1;
+    @include breakpoint(ipad-vert-max){
+        bottom: 2.1875em;
+    }
+    //easeInBack
+    transition: all $menuTransition cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    @include breakpoint(ipad-vert){
+        transform: rotate(270deg);
+        margin-top: (18em / 16) / 2 * -1;
+        top: 50%;
+        font-size: 1.125em;
+    }
 }

@@ -1,6 +1,7 @@
 body{
     color: #000;
     background: #000;
+    font-family: $mainFont;
 }
 
 #wrapper{
@@ -10,4 +11,9 @@ body{
 #content-wrapper{
     max-width: 80%;
     float: right;
+}
+
+a{
+    color: #000;
+    text-decoration: none;
 }

@@ -11,11 +11,20 @@
   @else if $point == ipad-horiz {
     @media (min-width: 64em)  { @content; } /* 1024/16 */
   }
+  @else if $point == ipad-horiz-max {
+    @media (max-width: 64em)  { @content; } /* 1024/16 */
+  }
   @else if $point == ipad-vert {
     @media (min-width: 48em)  { @content; } /* 768/16 */
   }
-  @else if $point == small-tablet {
+  @else if $point == ipad-vert-max {
+    @media (max-width: 48em)  { @content; } /* 768/16 */
+  }
+  @else if $point == phablet {
     @media (min-width: 37.5em)  { @content; } /* 600/16 */
+  }
+  @else if $point == phablet-max {
+    @media (max-width: 37.5em)  { @content; } /* 600/16 */
   }
   @else if $point == iphone-horiz {
     @media (min-width: 30em)  { @content; } /* 480/16 */
