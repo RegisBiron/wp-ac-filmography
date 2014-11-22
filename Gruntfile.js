@@ -19,13 +19,6 @@ module.exports = function (grunt) {
                     livereload: true
                 }
             },
-            styles: {
-                files: ['<%= config.dev %>/scss/**/*.scss'],
-                tasks: ['sass:dev'],
-                options: {
-                    livereload: true
-                }
-            },
             bake: {
                 files: [
                     '<%= config.dev %>/includes/**',
@@ -97,14 +90,6 @@ module.exports = function (grunt) {
             }
         },
 
-        bake: {
-    	    build: {
-    	        files: {
-    	            'index.html': 'dev/base.html'
-    	        }
-    	    }
-    	},
-
         autoprefixer: {
             dist: {
                 options: {
@@ -170,7 +155,6 @@ module.exports = function (grunt) {
             'connect:livereload',
             'sass:dev',
             'autoprefixer:dev',
-            'bake:build',
             'watch'
         ]);
     });
