@@ -20,10 +20,10 @@
   @else if $point == ipad-vert-max {
     @media (max-width: 48em)  { @content; } /* 768/16 */
   }
-  @else if $point == phablet {
+  @else if $point == small-tablet {
     @media (min-width: 37.5em)  { @content; } /* 600/16 */
   }
-  @else if $point == phablet-max {
+  @else if $point == small-tablet-max {
     @media (max-width: 37.5em)  { @content; } /* 600/16 */
   }
   @else if $point == iphone-horiz {

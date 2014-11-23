@@ -8,20 +8,19 @@ nav{
     left: 0;
     top: 0;
     bottom: 0;
-    padding: 2.1875em 3.125em 2.1875em 3.125em;
+    padding: 1.1875em 0 1.1875em 0;
     //easeInBack
     transition: all $menuTransition cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    z-index: 500;
+    @include breakpoint(ipad-vert){
+        padding: 2.1875em 0 2.1875em 0;
+    }
 }
 
 #main-menu{
-    float: left;
-    position: absolute;
-    left: -10em;
     padding: 0;
     margin: 0;
     list-style: none;
-    //easeInBack
-    transition: all $menuTransition cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
 
 #main-menu li{
@@ -29,9 +28,13 @@ nav{
     a{
         font-size: (20em / 16);
         font-weight: 400;
-        line-height: 0.8em;
+        line-height: 1em;
+        //easeOutCubic
+        transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
         &:hover{
             color: #979797;
+            //easeInCubic
+            transition: all 0.2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
         }
         @include breakpoint(ipad-vert){
             font-size: (30em / 16);
@@ -49,10 +52,12 @@ nav.open{
     }
 }
 
-nav.open #main-menu{
+nav.open #main-menu,
+nav.open #info-summary,
+nav.open #copyright{
     left: 10%;
     //easeOutBack
-    transition: all $menuTransition cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: all 0.5s ease;
     @include breakpoint(ipad-vert){
         left: 8%;
     }
@@ -83,7 +88,7 @@ nav.open #title{
         transform: rotate(270deg);
         width: 8em;
         margin-left: (8em / 2) * -1;
-        top: (8em / 2 );
+        top: (7em / 2 );
     }
     //min-width
     @include breakpoint(ipad-horiz){
@@ -103,15 +108,49 @@ nav.open #title{
     position: absolute;
     left: 50%;
     margin-left: (87em / 16) / 2 * -1;
+    transform: rotate(270deg);
     @include breakpoint(ipad-vert-max){
-        bottom: 2.1875em;
+        top: 15.1875em;
     }
     //easeInBack
     transition: all $menuTransition cubic-bezier(0.6, -0.28, 0.735, 0.045);
     @include breakpoint(ipad-vert){
-        transform: rotate(270deg);
         margin-top: (18em / 16) / 2 * -1;
         top: 50%;
         font-size: 1.125em;
     }
+}
+
+#info-summary{
+    max-width: 40%;
+    width: 40%;
+    top: 4.5em;
+    p{
+        font-weight: 400;
+        font-size: (12em / 16);
+    }
+    @include breakpoint(ipad-vert){
+        top: 7em;
+        p{
+            font-size: (14em / 16);
+        }
+    }
+}
+
+#copyright{
+    bottom: 2em;
+    font-weight: 400;
+    font-size: (12em / 16);
+    @include breakpoint(ipad-horiz){
+        font-size: 1em;
+    }
+}
+
+#main-menu,
+#info-summary,
+#copyright{
+    position: absolute;
+    left: -30em;
+    //easeInBack
+    transition: all 0.2s cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }

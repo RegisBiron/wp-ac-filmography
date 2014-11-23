@@ -1,7 +1,18 @@
 body{
     color: #000;
-    background: #000;
+    background: #FFF;
     font-family: $mainFont;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a{
+    color: #000;
+    text-decoration: none;
+}
+
+strong{
+    font-weight: 600;
 }
 
 #wrapper{
@@ -12,9 +23,118 @@ body{
     max-width: 80%;
     width: 80%;
     float: right;
+    position: relative;
+    background: #000;
 }
 
-a{
-    color: #000;
-    text-decoration: none;
+#top-info-bar{
+    width: 80%;
+    position: fixed;
+    top: -5em;
+    right: 0;
+    background: #000;
+    padding: 0.65em;
+    box-sizing: border-box;
+    transition: all 0.4s ease-out;
+    line-height: 19px;
+    z-index: 80;
+    &.in-view{
+        top: 0;
+        transition: all 0.4s ease-in;
+    }
+}
+
+#top-info-bar .time{
+    float: left;
+    font-size: (12em / 16);
+    margin: 0;
+    padding: 0;
+    color: #FFF;
+    @include breakpoint(small-tablet){
+        font-size: 0.8em;
+    }
+}
+
+#top-info-bar .social{
+    ul{
+        margin: 0;
+        padding: 0;
+        float: right;
+        position: relative;
+        li{
+            list-style: none;
+            display: inline-block;
+            a{
+                font-size: (12em / 16);
+                color: #FFF;
+                text-transform: uppercase;
+                @include breakpoint(small-tablet){
+                    font-size: 0.8em;
+                }
+                &:hover{
+                    border-bottom: 1px solid #FFF;
+                }
+            }
+        }
+    }
+}
+
+#filter-wrapper{
+    box-sizing: border-box;
+    width: 100%;
+    height: (70em / 16);
+    position: relative;
+    margin-top: 40px;
+    @include breakpoint(ipad-vert){
+        height: (100em / 16);
+    }
+    #filter-container{
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        padding: 8px;
+        @include breakpoint(ipad-vert){
+            padding: 10px;
+        }
+        .filter-content{
+            background: #FFF;
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+#tester-container{
+    width: 100%;
+    box-sizing: border-box;
+    .tester{
+        padding: 10px;
+        background: #CCC;
+        height: 1200px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
+
+.opacity-overlay{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    opacity: 0;
+    background: #000;
+    transition: all 0.2s ease-out;
+    display: none;
+    @include breakpoint(ipad-vert){
+        display: block;
+        z-index: 1;
+    }
+    &.active{
+        transition: all 0.4s ease-in;
+        opacity: 0.8;
+        z-index: 100;
+    }
 }
