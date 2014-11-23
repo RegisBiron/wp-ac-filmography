@@ -1,5 +1,9 @@
 //globals
 var navCounter = 0;
+var direction;
+var lastScroll = 0;
+var winHeight = $(window).height();
+var docHeight = $(document).height();
 
 $(document).ready(function() {
 
@@ -23,6 +27,22 @@ $(document).ready(function() {
             $('#bar-nav').addClass('open');
         }
     });
+
+    function getScrollDirection(){
+        var currentScroll = window.pageYOffset;
+        if(currentScroll > lastScroll && currentScroll >= 1){
+            // console.log('down');
+        }
+        else if(currentScroll < lastScroll && currentScroll <= (docHeight - winHeight) - 1){
+            // console.log('up');
+        }
+
+        lastScroll = currentScroll;
+    }
+
+    // $(document).scroll(function () {
+    //     getScrollDirection();
+    // });
 
     // $(window).resize(function(){
     //     var title = $('#title').offset().left;
