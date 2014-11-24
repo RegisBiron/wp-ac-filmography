@@ -2,8 +2,13 @@ body{
     color: #000;
     background: #FFF;
     font-family: $mainFont;
+    font-size: 16px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+ul li{
+    list-style: none;
 }
 
 a{
@@ -15,6 +20,14 @@ strong{
     font-weight: 600;
 }
 
+.clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+
 #wrapper{
     max-width: 100%;
 }
@@ -24,7 +37,7 @@ strong{
     width: 80%;
     float: right;
     position: relative;
-    background: #000;
+    z-index: 10;
 }
 
 #top-info-bar{
@@ -62,7 +75,6 @@ strong{
         float: right;
         position: relative;
         li{
-            list-style: none;
             display: inline-block;
             a{
                 font-size: (12em / 16);
@@ -75,31 +87,6 @@ strong{
                     border-bottom: 1px solid #FFF;
                 }
             }
-        }
-    }
-}
-
-#filter-wrapper{
-    box-sizing: border-box;
-    width: 100%;
-    height: (70em / 16);
-    position: relative;
-    margin-top: 40px;
-    @include breakpoint(ipad-vert){
-        height: (100em / 16);
-    }
-    #filter-container{
-        box-sizing: border-box;
-        width: 100%;
-        height: 100%;
-        padding: 8px;
-        @include breakpoint(ipad-vert){
-            padding: 10px;
-        }
-        .filter-content{
-            background: #FFF;
-            width: 100%;
-            height: 100%;
         }
     }
 }

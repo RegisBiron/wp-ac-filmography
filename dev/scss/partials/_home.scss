@@ -1,0 +1,78 @@
+#filter-wrapper{
+    box-sizing: border-box;
+    width: 100%;
+    position: relative;
+    margin-top: 33px;
+    background: #000;
+    @include breakpoint(ipad-vert){
+        margin-top: 35px;
+    }
+}
+
+#filter-container{
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 8px 8px 8px 8px;
+    @include breakpoint(ipad-vert){
+        padding: 0 10px 10px 10px;
+    }
+}
+
+.filter-content{
+    background: #FFF;
+    width: 100%;
+    padding: 1.5em 0 1.5em 0;
+    @include breakpoint(ipad-vert){
+        padding: 3em 0 3em 0;
+    }
+}
+
+.filter-mobile-button{
+    display: block;
+    text-align: center;
+    a{
+        font-size: (14em / 16);
+        text-transform: uppercase;
+    }
+    @include breakpoint(ipad-vert){
+        display: none;
+    }
+}
+
+.filter-content{
+    .filter-nav{
+        text-align: center;
+        line-height: 1em;
+        display: none;
+        @include breakpoint(ipad-vert){
+            display: block;
+        }
+        ul{
+            margin: 0;
+            padding: 0;
+            display: block;
+            @include breakpoint(ipad-vert-max){
+                padding-top: 1.5em;
+            }
+            li{
+                display: inline-block;
+                padding: 0 1em 0 1em;
+                @include breakpoint(ipad-vert-max){
+                    line-height: 2em;
+                }
+                a{
+                    font-size: (14em / 16);
+                    font-weight: 400;
+                    text-transform: uppercase;
+                }
+            }
+        }
+    }
+}
+
+.filter-content .filter-nav{
+    &.open{
+        display: block;
+    }
+}

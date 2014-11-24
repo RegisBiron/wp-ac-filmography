@@ -1,5 +1,5 @@
 //globals
-var navCounter = 0;
+// var navCounter = 0;
 var direction;
 var lastScroll = 0;
 var winHeight = $(window).height();
@@ -12,25 +12,42 @@ $(document).ready(function() {
 
     $('#menu-button[href="#"]').click(function(e) {
         e.preventDefault();
-        navCounter += 1;
+        // navCounter += 1;
 
-        if(!$('.open').length){
+        $('#bar-nav').toggleClass('open');
+        $('.opacity-overlay').toggleClass('active');
+
+        if($('.open').hasClass('open')){
             $('#menu-button span').text('[—]');
         }
         else{
             $('#menu-button span').text('[+]');
-            navCounter += 1;
+            // navCounter += 1;
         }
 
-        if(navCounter >= 3){
-            navCounter = 1;
-            $('#bar-nav').removeClass('open');
-            $('.opacity-overlay').removeClass('active');
+        // if(navCounter >= 3){
+        //     navCounter = 1;
+        //     $('#bar-nav').removeClass('open');
+        //     $('.opacity-overlay').removeClass('active');
+        // }
+        // else{
+        //     $('#bar-nav').addClass('open');
+        //     $('.opacity-overlay').addClass('active');
+        // }
+    });
+
+    $('.filter-mobile-button a[href="#"]').click(function(e) {
+        e.preventDefault();
+        $('.filter-nav').toggleClass('open');
+
+        if($('.filter-nav').hasClass('open')){
+            $(this).text('Filter [—]');
         }
         else{
-            $('#bar-nav').addClass('open');
-            $('.opacity-overlay').addClass('active');
+            $(this).text('Filter [+]');
+            // navCounter += 1;
         }
+
     });
 
     function getScrollDirection(){
@@ -50,14 +67,19 @@ $(document).ready(function() {
 
     $(document).scroll(function () {
         var currPos;
+        var infoBarHeight = $('#top-info-bar').outerHeight();
+        var filterNavHeight = $('#filter-container').outerHeight();
+
         currPos = $(window).scrollTop();
         getScrollDirection();
-        if(direction == 'up' && currPos >= 60){
+
+        if(direction == 'up' && currPos >= (infoBarHeight + filterNavHeight)){
             $("#top-info-bar").addClass('in-view');
         }
-        else if(direction == 'down' && currPos >= 60){
+        else if(direction == 'down' && currPos >= (infoBarHeight + filterNavHeight)){
             $("#top-info-bar").removeClass('in-view');
         }
+
     });
 
     //film countdown animation

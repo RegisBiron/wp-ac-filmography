@@ -28,7 +28,7 @@ nav{
     a{
         font-size: (20em / 16);
         font-weight: 400;
-        line-height: 1em;
+        line-height: 1.25em;
         //easeOutCubic
         transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
         &:hover{
@@ -92,15 +92,15 @@ nav.open #title{
     }
     //min-width
     @include breakpoint(ipad-horiz){
-        width: 7.2em;
-        margin-left: (7.2em / 2) * -1;
+        width: 7.5em;
+        margin-left: (7.5em / 2) * -1;
         text-align: center;
         font-size: 1.5em;
     }
 }
 
 #menu-button{
-    font-size: 0.8em;
+    font-size: 0.9em;
     font-weight: 400;
     text-transform: uppercase;
     display: block;
@@ -130,7 +130,7 @@ nav.open #title{
         font-size: (12em / 16);
     }
     @include breakpoint(ipad-vert){
-        top: 7em;
+        top: 7.25em;
         p{
             font-size: (14em / 16);
         }
@@ -142,7 +142,7 @@ nav.open #title{
     font-weight: 400;
     font-size: (12em / 16);
     @include breakpoint(ipad-horiz){
-        font-size: 1em;
+        font-size: 0.9em;
     }
 }
 
