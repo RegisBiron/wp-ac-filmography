@@ -53,8 +53,8 @@ nav.open{
 }
 
 nav.open #main-menu,
-nav.open #info-summary,
-nav.open #copyright{
+nav.open .info-summary,
+nav.open .copyright{
     left: 10%;
     //easeOutBack
     transition: all 0.5s ease;
@@ -121,7 +121,7 @@ nav.open #title{
     }
 }
 
-#info-summary{
+.info-summary{
     max-width: 40%;
     width: 40%;
     top: 4.5em;
@@ -137,7 +137,7 @@ nav.open #title{
     }
 }
 
-#copyright{
+.copyright{
     bottom: 2em;
     font-weight: 400;
     font-size: (12em / 16);
@@ -147,8 +147,8 @@ nav.open #title{
 }
 
 #main-menu,
-#info-summary,
-#copyright{
+.info-summary,
+.copyright{
     position: absolute;
     left: -30em;
     //easeInBack

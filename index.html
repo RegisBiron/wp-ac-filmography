@@ -19,7 +19,7 @@
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
 
-    <div id="wrapper">
+    <div id="page">
 
         <nav role="navigation" id="bar-nav">
             <a href="#" id="title" class="set-position">Alex Coppola <span>Film[O]graphy</span></a>
@@ -28,7 +28,7 @@
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
-            <div id="info-summary">
+            <div class="info-summary">
                 <p>Alex is a video producer based in Portland, ME.<br /><br />
                     Have an idea for a video? Want to grab some chicken fingers at Ruskis?<br /><br />
                     <strong>Get in Touch</strong><br />
@@ -36,7 +36,7 @@
                     +1 207 712 3203
                 </p>
             </div>
-            <div id="copyright">&copy; Alex Coppola. All Rights Reserved.</div>
+            <div class="copyright">&copy; Alex Coppola. All Rights Reserved.</div>
         </nav>
         <div class="opacity-overlay"></div>
         <div id="content-wrapper">
@@ -57,13 +57,33 @@
                         <div class="filter-mobile-button"><a href="#">Filter [+]</a></div>
                         <div class="filter-nav clearfix">
                             <ul>
-                                <li><a href="">All</a></li>
-                                <li><a href="">Documentary</a></li>
-                                <li><a href="">Music</a></li>
-                                <li><a href="">Personal</a></li>
+                                <li><a href="#" data-filter="*">All</a></li>
+                                <li><a href="#" data-filter=".documentary">Documentary</a></li>
+                                <li><a href="#" data-filter="*">Music</a></li>
+                                <li><a href="#" data-filter="*">Personal</a></li>
                             </ul>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="vid-list">
+                <div class="vid-iso-container">
+                    <article class="vid-iso-grid -half documentary">
+                        <div class="vid-content">
+                            <img src="dev/images/scorsese1024x570.jpg" />
+                        </div>
+                    </article>
+                    <article class="vid-iso-grid -half">
+                        <div class="vid-content">
+                            <img src="dev/images/we-sleep1024x570.jpg" />
+                        </div>
+                    </article>
+                    <article class="vid-iso-grid -full documentary">
+                        <div class="vid-content">
+                            <img src="dev/images/diner1280x720.jpg" />
+                        </div>
+                    </article>
                 </div>
             </div>
 

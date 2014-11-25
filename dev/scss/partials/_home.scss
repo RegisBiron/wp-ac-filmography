@@ -65,6 +65,9 @@
                     font-size: (14em / 16);
                     font-weight: 400;
                     text-transform: uppercase;
+                    &:hover{
+                        border-bottom: 1px solid #000;
+                    }
                 }
             }
         }
@@ -75,4 +78,51 @@
     &.open{
         display: block;
     }
+}
+
+.vid-list{
+    width: 100%;
+    padding: 0 5px 0 5px;
+    background: #000;
+    box-sizing: border-box;
+}
+
+.vid-iso-container{
+    width: 100%;
+    overflow: hidden;
+    .vid-content{
+        margin: 0 2.5px 4px 2.5px;
+        @include breakpoint(ipad-vert){
+            margin: 0 5px 6px 5px;
+        }
+    }
+}
+
+.vid-iso-grid{
+    float: left;
+}
+
+.-quarter{
+    width: 100%;
+    @include breakpoint(ipad-vert){
+        width: 25%;
+    }
+}
+
+.-half{
+    width: 100%;
+    @include breakpoint(ipad-vert){
+        width: 50%;
+    }
+}
+
+.-three-quarters{
+    width: 100%;
+    @include breakpoint(ipad-vert){
+        width: 75%;
+    }
+}
+
+.-full{
+    width: 100%;
 }

@@ -82,6 +82,25 @@ $(document).ready(function() {
 
     });
 
+    //isotope
+    var $container = $('.vid-iso-container').isotope({
+        itemSelector: '.vid-iso-grid',
+        transitionDuration: '0.2s',
+        masonry: {
+            columnWidth: '.vid-iso-grid'
+        }
+        // getSortData: {
+        //     category: '[data-category]'
+        // }
+    });
+
+    //isotope filtering
+    $('.filter-nav ul li a').on( 'click', function(e) {
+        e.preventDefault();
+        var filterValue = $(this).attr('data-filter');
+        $container.isotope({ filter: filterValue });
+    });
+
     //film countdown animation
     // $(function() {
     //     filmCountDown();
