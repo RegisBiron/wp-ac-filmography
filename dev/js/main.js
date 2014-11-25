@@ -1,14 +1,19 @@
 //globals
 // var navCounter = 0;
-var direction;
-var lastScroll = 0;
-var winHeight = $(window).height();
-var docHeight = $(document).height();
-var countDown = 0;
-var countDownNum = ['5', '4', '3', '2', '1'];
-var timer;
+var isMobile = false,
+direction,
+lastScroll = 0,
+winHeight = $(window).height(),
+docHeight = $(document).height(),
+countDown = 0,
+countDownNum = ['5', '4', '3', '2', '1'],
+timer;
 
 $(document).ready(function() {
+
+    if(navigator.userAgent.match(/(android|iphone|ipad|blackberry|symbian|symbianos|symbos|netfront|model-orange|javaplatform|iemobile|windows phone|samsung|htc|opera mobile|opera mobi|opera mini|presto|huawei|blazer|bolt|doris|fennec|gobrowser|iris|maemo browser|mib|cldc|minimo|semc-browser|skyfire|teashark|teleca|uzard|uzardweb|meego|nokia|bb10|playbook)/gi)){
+        isMobile = true;
+    }
 
     $('#menu-button[href="#"]').click(function(e) {
         e.preventDefault();
@@ -19,9 +24,13 @@ $(document).ready(function() {
 
         if($('.open').hasClass('open')){
             $('#menu-button span').text('[—]');
+            $('body').css('overflow', 'hidden');
+            document.ontouchmove = function(e){ e.preventDefault(); }
         }
         else{
             $('#menu-button span').text('[+]');
+            $('body').removeAttr('style');
+            document.ontouchmove = function(e){ return true; }
             // navCounter += 1;
         }
 
@@ -65,22 +74,23 @@ $(document).ready(function() {
         return direction;
     }
 
-    $(document).scroll(function () {
-        var currPos;
-        var infoBarHeight = $('#top-info-bar').outerHeight();
-        var filterNavHeight = $('#filter-container').outerHeight();
+    if(!isMobile){
+        $(document).scroll(function () {
+            var currPos;
+            var infoBarHeight = $('#top-info-bar').outerHeight();
+            var filterNavHeight = $('#filter-container').outerHeight();
 
-        currPos = $(window).scrollTop();
-        getScrollDirection();
+            currPos = $(window).scrollTop();
+            getScrollDirection();
 
-        if(direction == 'up' && currPos >= (infoBarHeight + filterNavHeight)){
-            $("#top-info-bar").addClass('in-view');
-        }
-        else if(direction == 'down' && currPos >= (infoBarHeight + filterNavHeight)){
-            $("#top-info-bar").removeClass('in-view');
-        }
-
-    });
+            if(direction == 'up' && currPos >= (infoBarHeight + filterNavHeight)){
+                $("#top-info-bar").addClass('in-view');
+            }
+            else if(direction == 'down' && currPos >= (infoBarHeight + filterNavHeight)){
+                $("#top-info-bar").removeClass('in-view');
+            }
+        });
+    }
 
     //isotope
     var $container = $('.vid-iso-container').isotope({
