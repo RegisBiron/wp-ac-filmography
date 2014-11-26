@@ -1,48 +1,52 @@
 //globals
-// var navCounter = 0;
-var isMobile = false,
+var navCounter = 0,
+isMobile = false,
 direction,
 lastScroll = 0,
-winHeight = $(window).height(),
-docHeight = $(document).height(),
+winHeight,
+docHeight,
+currPos,
 countDown = 0,
 countDownNum = ['5', '4', '3', '2', '1'],
-timer;
+timer,
+pageIndex = 2,
+nextPage;
+
+if(navigator.userAgent.match(/(android|iphone|ipad|blackberry|symbian|symbianos|symbos|netfront|model-orange|javaplatform|iemobile|windows phone|samsung|htc|opera mobile|opera mobi|opera mini|presto|huawei|blazer|bolt|doris|fennec|gobrowser|iris|maemo browser|mib|cldc|minimo|semc-browser|skyfire|teashark|teleca|uzard|uzardweb|meego|nokia|bb10|playbook)/gi)){
+    isMobile = true;
+}
 
 $(document).ready(function() {
 
-    if(navigator.userAgent.match(/(android|iphone|ipad|blackberry|symbian|symbianos|symbos|netfront|model-orange|javaplatform|iemobile|windows phone|samsung|htc|opera mobile|opera mobi|opera mini|presto|huawei|blazer|bolt|doris|fennec|gobrowser|iris|maemo browser|mib|cldc|minimo|semc-browser|skyfire|teashark|teleca|uzard|uzardweb|meego|nokia|bb10|playbook)/gi)){
-        isMobile = true;
-    }
+    nextPage = $('.vid-list').data('next-page');
+    checkPageBottom();
 
     $('#menu-button[href="#"]').click(function(e) {
         e.preventDefault();
-        // navCounter += 1;
+        navCounter += 1;
 
-        $('#bar-nav').toggleClass('open');
-        $('.opacity-overlay').toggleClass('active');
-
-        if($('.open').hasClass('open')){
-            $('#menu-button span').text('[—]');
-            $('body').css('overflow', 'hidden');
-            document.ontouchmove = function(e){ e.preventDefault(); }
+        //navigation logic is based on an index because firefox cancels the menu transition when overflow:hidden is added to the body element
+        if(navCounter >= 3){
+            navCounter = 1;
+            $('#bar-nav').removeClass('open');
+            $('.opacity-overlay').removeClass('active');
+            $('#menu-button span').text('[+]');
+            setTimeout( function() {
+                $('body').removeAttr('style');
+            }, 400);
+            $('#bar-nav').removeClass('open');
+            document.ontouchmove = function(e){ return true; }
         }
         else{
-            $('#menu-button span').text('[+]');
-            $('body').removeAttr('style');
-            document.ontouchmove = function(e){ return true; }
-            // navCounter += 1;
+            $('#bar-nav').addClass('open');
+            $('.opacity-overlay').addClass('active');
+            $('#menu-button span').text('[—]');
+            setTimeout( function() {
+                $('body').css('overflow', 'hidden');
+            }, 400);
+            document.ontouchmove = function(e){ e.preventDefault(); }
+            navCounter += 1;
         }
-
-        // if(navCounter >= 3){
-        //     navCounter = 1;
-        //     $('#bar-nav').removeClass('open');
-        //     $('.opacity-overlay').removeClass('active');
-        // }
-        // else{
-        //     $('#bar-nav').addClass('open');
-        //     $('.opacity-overlay').addClass('active');
-        // }
     });
 
     $('.filter-mobile-button a[href="#"]').click(function(e) {
@@ -54,7 +58,6 @@ $(document).ready(function() {
         }
         else{
             $(this).text('Filter [+]');
-            // navCounter += 1;
         }
 
     });
@@ -74,23 +77,32 @@ $(document).ready(function() {
         return direction;
     }
 
-    if(!isMobile){
+
         $(document).scroll(function () {
-            var currPos;
+
+            winHeight = $(window).height();
+            docHeight = $(document).height();
+
             var infoBarHeight = $('#top-info-bar').outerHeight();
             var filterNavHeight = $('#filter-container').outerHeight();
 
             currPos = $(window).scrollTop();
             getScrollDirection();
 
-            if(direction == 'up' && currPos >= (infoBarHeight + filterNavHeight)){
-                $("#top-info-bar").addClass('in-view');
+            if(!isMobile){
+                if(direction == 'up' && currPos >= (infoBarHeight + filterNavHeight)){
+                    $("#top-info-bar").addClass('in-view');
+                }
+                else if(direction == 'down' && currPos >= (infoBarHeight + filterNavHeight)){
+                    $("#top-info-bar").removeClass('in-view');
+                }
+
+                if(currPos === 0){
+                    $("#top-info-bar").addClass('in-view');
+                }
             }
-            else if(direction == 'down' && currPos >= (infoBarHeight + filterNavHeight)){
-                $("#top-info-bar").removeClass('in-view');
-            }
+
         });
-    }
 
     //isotope
     var $container = $('.vid-iso-container').isotope({
@@ -110,6 +122,59 @@ $(document).ready(function() {
         var filterValue = $(this).attr('data-filter');
         $container.isotope({ filter: filterValue });
     });
+
+
+    function checkPageBottom(){
+        var checkPageInterval = setInterval(function(){
+
+            if(nextPage){
+                if(currPos >= (docHeight - winHeight)){
+                    infiniteScroll();
+                }
+            }
+
+            if(!nextPage){
+                clearInterval(checkPageInterval);
+            }
+        },100);
+    }
+
+    function infiniteScroll(){
+
+        // console.log('bottom');
+
+        $.ajax('http://0.0.0.0:9000/page-' + pageIndex + '.html', {
+            dataType: 'html',
+            success: function(data) {
+
+                var $newContent,
+                    $pageValid;
+
+                $newContent = $(data).find('.vid-iso-grid');
+
+                //data is set to a boolean on the containing isotope element in the ajaxed page
+                $pageValid = $(data).find('.vid-list').data('next-page');
+
+                //the isotope append method
+                $container.append($newContent).isotope( 'appended', $newContent, afterLoad());
+
+                function afterLoad(){
+
+                    //this is for safari
+                    setTimeout( function() {
+                        $container.isotope('layout');
+                    }, 100);
+                }
+
+                nextPage = $pageValid;
+                pageIndex++;
+
+            },
+            error: function() {
+                console.log('infiniteScroll ajax error');
+            }
+        });
+    }
 
     //film countdown animation
     // $(function() {
