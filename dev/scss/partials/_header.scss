@@ -1,0 +1,50 @@
+#top-info-bar{
+    width: 80%;
+    position: fixed;
+    top: -5em;
+    right: 0;
+    background: #000;
+    padding: 0.65em;
+    box-sizing: border-box;
+    transition: all 0.4s ease-out;
+    line-height: 19px;
+    z-index: 80;
+    &.in-view{
+        top: 0;
+        transition: all 0.4s ease-in;
+    }
+}
+
+#top-info-bar .time{
+    float: left;
+    font-size: (12em / 16);
+    margin: 0;
+    padding: 0;
+    color: #FFF;
+    @include breakpoint(small-tablet){
+        font-size: 0.8em;
+    }
+}
+
+#top-info-bar .social{
+    ul{
+        margin: 0;
+        padding: 0;
+        float: right;
+        position: relative;
+        li{
+            display: inline-block;
+            a{
+                font-size: (12em / 16);
+                color: #FFF;
+                text-transform: uppercase;
+                @include breakpoint(small-tablet){
+                    font-size: 0.8em;
+                }
+                &:hover{
+                    border-bottom: 1px solid #FFF;
+                }
+            }
+        }
+    }
+}

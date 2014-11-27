@@ -90,11 +90,15 @@ module.exports = function (grunt) {
         autoprefixer: {
             dist: {
                 options: {
-                    browsers: ['last 1 version']
+                    browsers: ['last 1 version'],
+                    style: 'compressed'
                 },
-                files: {
-                    '<%= config.dist %>/style.css': ['.tmp/styles/style.css']
-                }
+                files: [{
+                    expand: true,
+                    cwd: '.tmp/styles/',
+                    src: '*.css',
+                    dest: '<%= config.dist %>/styles'
+                }]
             },
             dev: {
                 options: {
@@ -110,21 +114,21 @@ module.exports = function (grunt) {
             }
         },
 
-        concat: {
-            dist: {
-                src: [
-                    '<%= config.dev %>/scripts/*.js'
-                ],
-                dest: '.tmp/scripts/main.js',
-            }
-        },
-
-        uglify: {
-            dist: {
-                src: '.tmp/scripts/main.js',
-                dest: '<%= config.dist %>/scripts/main.min.js'
-            }
-        },
+        // concat: {
+        //     dist: {
+        //         src: [
+        //             '<%= config.dev %>/js/*.js'
+        //         ],
+        //         dest: '.tmp/js/main.js',
+        //     }
+        // },
+        //
+        // uglify: {
+        //     dist: {
+        //         src: '.tmp/js/main.js',
+        //         dest: '<%= config.dist %>/js/main.min.js'
+        //     }
+        // },
 
         clean: {
             src: [".tmp/"]
@@ -133,12 +137,30 @@ module.exports = function (grunt) {
         responsive_images: {
             dist: {
                 options: {
-                    engine: 'im'
+                    engine: 'im',
+                    sizes: [{
+                        width: 320,
+                    },{
+                        width: 640,
+                    },{
+                        width: 1024,
+                    }]
                 },
                 files: [{
                     expand: true,
                     cwd: '<%= config.dev %>/images',
-                    src: '{,*/}*.{gif,jpeg,jpg,png}',
+                    src: '**/*.{gif,jpeg,jpg,png}',
+                    dest: '<%= config.dist %>/images'
+                }]
+            }
+        },
+
+        copy: {
+            dist: {
+                files: [{
+                    expand: true,
+                    src: ['**/*'],
+                    cwd: '<%= config.dev %>/images',
                     dest: '<%= config.dist %>/images'
                 }]
             }
@@ -159,10 +181,9 @@ module.exports = function (grunt) {
     grunt.registerTask('build', [
         'clean',
         'responsive_images',
+        'copy',
         'sass:dist',
-        'bake:build',
-        'concat:dist',
-        'uglify:dist'
+        'autoprefixer:dist'
     ]);
 
     grunt.registerTask('default', [
