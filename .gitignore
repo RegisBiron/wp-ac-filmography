@@ -5,3 +5,4 @@ node_modules
 dev/styles
 dev/images
 dist
+package.json

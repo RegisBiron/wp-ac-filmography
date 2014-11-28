@@ -62,6 +62,13 @@ module.exports = function (grunt) {
             }
         },
 
+        jshint: {
+            options: {
+                jshintrc: '.jshintrc'
+            },
+            src: ['<%= config.dev %>/js/main.js'],
+        },
+
         sass: {
             dist: {
                 options: {
@@ -115,15 +122,24 @@ module.exports = function (grunt) {
         },
 
         // concat: {
+        //     options: {
+        //         separator: ';',
+        //             stripBanners: {
+        //                 block: true,
+        //                 line: true
+        //             },
+        //     },
         //     dist: {
-        //         src: [
-        //             '<%= config.dev %>/js/*.js'
-        //         ],
+        //         src: ['<%= config.dev %>/js/vendor/**.js', '!<%= config.dev %>/js/vendor/modernizr-2.8.3.min.js', '<%= config.dev %>/js/plugins.js', '<%= config.dev %>/js/main.js'],
         //         dest: '.tmp/js/main.js',
-        //     }
+        //     },
         // },
         //
         // uglify: {
+        //     options: {
+        //         compress: true,
+        //         preserveComments: false
+        //     },
         //     dist: {
         //         src: '.tmp/js/main.js',
         //         dest: '<%= config.dist %>/js/main.min.js'

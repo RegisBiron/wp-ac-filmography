@@ -14,12 +14,13 @@ pageIndex = 2;
 
 $(document).ready(function() {
 
+
     if(navigator.userAgent.match(/(android|iphone|ipad|blackberry|symbian|symbianos|symbos|netfront|model-orange|javaplatform|iemobile|windows phone|samsung|htc|opera mobile|opera mobi|opera mini|presto|huawei|blazer|bolt|doris|fennec|gobrowser|iris|maemo browser|mib|cldc|minimo|semc-browser|skyfire|teashark|teleca|uzard|uzardweb|meego|nokia|bb10|playbook)/gi)){
         isMobile = true;
     }
 
     $.ajaxSetup ({
-        dataType: "html",
+        dataType: 'html',
         cache: false
     });
 
@@ -48,7 +49,7 @@ $(document).ready(function() {
         setTimeout( function() {
             $('body').css('overflow', 'hidden');
         }, 400);
-        document.ontouchmove = function(e){ e.preventDefault(); }
+        document.ontouchmove = function(e){ e.preventDefault(); };
         navCounter += 1;
     }
 
@@ -60,7 +61,7 @@ $(document).ready(function() {
             $('body').removeAttr('style');
         }, 400);
         $('#bar-nav').removeClass('open');
-        document.ontouchmove = function(e){ return true; }
+        document.ontouchmove = function(e){ return true; };
         navCounter = 1;
     }
 
@@ -110,14 +111,14 @@ $(document).ready(function() {
 
         if(!isMobile){
             if(direction == 'up' && currPos >= (infoBarHeight + filterNavHeight)){
-                $("#top-info-bar").addClass('in-view');
+                $('#top-info-bar').addClass('in-view');
             }
             else if(direction == 'down' && currPos >= (infoBarHeight + filterNavHeight)){
-                $("#top-info-bar").removeClass('in-view');
+                $('#top-info-bar').removeClass('in-view');
             }
 
             if(currPos === 0){
-                $("#top-info-bar").addClass('in-view');
+                $('#top-info-bar').addClass('in-view');
             }
         }
 
