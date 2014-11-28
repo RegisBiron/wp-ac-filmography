@@ -91,10 +91,98 @@
 .vid-iso-container{
     width: 100%;
     overflow: hidden;
-    .vid-content{
-        margin: 0 2.5px 4px 2.5px;
+}
+
+.vid-content{
+    margin: 0 2.5px 8px 2.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.vid-content{
+    .play-icon{
+        position: absolute;
+        color: #000;
+        bottom: 50%;
+        left: 50%;
+        margin-bottom: -20px;
+        margin-left: -20px;
+        font-size: 40px;
+        z-index: 150;
+        @include breakpoint(ipad-horiz){
+            bottom: -3em;
+            margin-bottom: -25px;
+            margin-left: -25px;
+            font-size: 50px;
+            //easeInExpo
+            transition: all 0.4s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+            opacity: 0;
+        }
+    }
+}
+
+.vid-content{
+    img{
         @include breakpoint(ipad-vert){
-            margin: 0 5px 6px 5px;
+            transition: all 0.2s ease-out;
+        }
+    }
+    @include breakpoint(ipad-vert){
+        margin: 0 5px 8px 5px;
+    }
+}
+
+.vid-content{
+    .film-info{
+        background: #FFF;
+        position: absolute;
+        z-index: 100;
+        width: 100%;
+        bottom: 0;
+        @include breakpoint(ipad-horiz){
+            bottom: -4em;
+            //eastOutQuint
+            transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        h2{
+            margin: 0;
+            font-weight: 400;
+            font-size: 0.8em;
+            padding: 0.5em 1em 0.5em 1em;
+            transition: all 0.2s ease-out;
+            @include breakpoint(ipad-horiz){
+                font-size: 1em;
+            }
+        }
+    }
+}
+
+.vid-content{
+    a{
+        display: block;
+        cursor: pointer;
+        &:hover{
+            img{
+                @include breakpoint(ipad-horiz){
+                    transform: scale3d(1.05, 1.05, 1.05);
+                    transition: all 0.4s ease-in;
+                }
+            }
+            .play-icon{
+                @include breakpoint(ipad-horiz){
+                    bottom: 50%;
+                    opacity: 1;
+                    //easeOutExpo
+                    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+                }
+            }
+            .film-info{
+                @include breakpoint(ipad-horiz){
+                    //easeInQuint
+                    transition: all 0.4s cubic-bezier(0.755, 0.05, 0.855, 0.06);
+                    bottom: 0;
+                }
+            }
         }
     }
 }
