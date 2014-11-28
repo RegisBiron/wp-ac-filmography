@@ -126,6 +126,7 @@
 
 .vid-content{
     img{
+        filter: grayscale(100%);
         @include breakpoint(ipad-vert){
             transition: all 0.2s ease-out;
         }
@@ -169,6 +170,7 @@
                 @include breakpoint(ipad-horiz){
                     transform: scale3d(1.05, 1.05, 1.05);
                     transition: all 0.4s ease-in;
+                    filter: none;
                 }
             }
             .play-icon{
