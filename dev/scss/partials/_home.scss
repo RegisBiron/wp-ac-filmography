@@ -97,6 +97,9 @@
     margin: 0 2.5px 8px 2.5px;
     position: relative;
     overflow: hidden;
+    @include breakpoint(ipad-vert){
+        margin: 0 5px 10px 5px;
+    }
 }
 
 .vid-content{
