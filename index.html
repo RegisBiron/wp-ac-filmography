@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Alex Coppola — Filmography</title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1, minimal-ui">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
@@ -13,6 +13,7 @@
         <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400,600,700' rel='stylesheet' type='text/css'>
 
         <script src="dev/js/vendor/modernizr-2.8.3.min.js"></script>
+        <script src="dev/js/lazysizes-respimage.min.js" async=""></script>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -44,6 +45,7 @@
         <div id="content-wrapper">
             <div id="top-info-bar" class="in-view">
                 <div class="time">00:00:00</div>
+                <div id="overlay-close">Close [X]</div>
                 <div class="social">
                     <ul>
                         <li><a href="#">Vimeo</a></li>
@@ -119,13 +121,16 @@
                 </div>
             </div>
 
-            <!-- <div id="tester-container">
-                <div class="tester"></div>
-            </div> -->
+            <div class="film-ajax-container">
+                <div class="film-overlay-content">
+
+                </div>
+            </div>
 
         <div class="infinite-scroll-loader">
             <p>Loading&hellip;</p>
         </div>
+
         </div><!--/content-wrapper-->
     </div><!--/wrapper-->
 

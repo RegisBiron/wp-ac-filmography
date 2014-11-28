@@ -97,7 +97,7 @@ module.exports = function (grunt) {
         autoprefixer: {
             dist: {
                 options: {
-                    browsers: ['last 1 version'],
+                    browsers: ['last 2 versions'],
                     style: 'compressed'
                 },
                 files: [{

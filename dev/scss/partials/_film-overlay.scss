@@ -1,0 +1,40 @@
+.film-ajax-container{
+    background: #000;
+    transform: scale3d(0, 0, 0);
+    position: fixed;
+    width: 80%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    //easeInExpo
+    transition: all 0.4s cubic-bezier(1, 0, 0, 1);
+}
+
+#overlay-close{
+    margin: 0 auto;
+    color: #FFF;
+    font-size: 1em;
+    position: absolute;
+    top: -3em;
+    margin-left: (86px / 2) * -1;
+    left: 50%;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease-out;
+    z-index: 210;
+}
+
+.is-overlay{
+    #overlay-close{
+        top: 10px;
+        transition: all 0.6s ease-in;
+    }
+}
+
+.film-ajax-container{
+    &.-overlay-active{
+        //easeOutExpo
+        transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+}
