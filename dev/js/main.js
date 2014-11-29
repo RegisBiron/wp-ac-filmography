@@ -252,10 +252,11 @@ $(document).ready(function() {
 
     //film overlay
     var ajaxLink;
-    var homeTitle = 'Alex Coppola — Film Example';
+    var currentTitle;
 
     $(document).on('click','.vid-content a', function(e){
         e.preventDefault();
+        currentTitle = document.title;
         ajaxLink = $(this);
         $('html').addClass('loading');
         openOverlay();
@@ -264,6 +265,13 @@ $(document).ready(function() {
     $('#overlay-close').on('click', function(e){
         e.preventDefault();
         closeOverlay();
+    });
+
+    $('#title').on('click', function(e){
+        e.preventDefault();
+        if($('.is-overlay').length){
+            closeOverlay();
+        }
     });
 
     function openOverlay(){
@@ -297,7 +305,7 @@ $(document).ready(function() {
         });
     }
 
-    //load overlay
+    //load video overlay
     var History;
 
     if (history.pushState) {
@@ -307,7 +315,7 @@ $(document).ready(function() {
             History.pushState('','', url.attr('href'));
 
             String.prototype.decodeHTML = function() {
-                return $("<div>", {html: "" + this}).html();
+                return $("<div>", {html: '' + this}).html();
             }
 
             $('.film-ajax-container').load(url.attr('href') + ' .film-overlay-content', function(response) {
@@ -319,8 +327,8 @@ $(document).ready(function() {
 
         function removeVideo(){
             History.pushState('','', '/');
-            $('.film-ajax-container').remove('.film-overlay-content');
-            document.title = 'Alex Coppola — Filmography';
+            $('.film-overlay-content').remove();
+            document.title = currentTitle;
         }
     }
 
@@ -328,8 +336,7 @@ $(document).ready(function() {
     if (history.pushState) {
         History.Adapter.bind(window,'statechange',function(){
             var State = History.getState();
-
-            // $(document).find('a[href$="' + State.url + '"]').trigger("click");
+            $(document).find('a[href$="' + State.url + '"]').trigger('click');
         });
     }
 
