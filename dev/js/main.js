@@ -14,9 +14,20 @@ pageIndex = 2;
 
 $(document).ready(function() {
 
+    $('.test').transition({ height: 0 }, 250, "easeInOutCubic", function(){
+
+    });
+
     if(navigator.userAgent.match(/(android|iphone|ipad|blackberry|symbian|symbianos|symbos|netfront|model-orange|javaplatform|iemobile|windows phone|samsung|htc|opera mobile|opera mobi|opera mini|presto|huawei|blazer|bolt|doris|fennec|gobrowser|iris|maemo browser|mib|cldc|minimo|semc-browser|skyfire|teashark|teleca|uzard|uzardweb|meego|nokia|bb10|playbook)/gi)){
         isMobile = true;
     }
+
+    var easeInOut = "ease-in-out";
+    if(!Modernizr.csstransitions)
+        {
+            $.fn.transition = $.fn.animate;
+            easeInOut = "easeInOutQuint";
+        }
 
     $.ajaxSetup ({
         dataType: 'html',
@@ -240,8 +251,13 @@ $(document).ready(function() {
     }
 
     //film overlay
-    $('body').on('click','.vid-content a', function(e){
+    var ajaxLink;
+    var homeTitle = 'Alex Coppola — Film Example';
+
+    $(document).on('click','.vid-content a', function(e){
         e.preventDefault();
+        ajaxLink = $(this);
+        $('html').addClass('loading');
         openOverlay();
     });
 
@@ -253,10 +269,10 @@ $(document).ready(function() {
     function openOverlay(){
         $('html').addClass('is-overlay');
         $('.film-ajax-container').addClass('-overlay-active');
-        $('.film-ajax-container').css({
+        $('.film-ajax-container').transition({
             scale: 1,
             complete: function() {
-                //loadVideo();
+                loadVideo(ajaxLink);
             }
         });
         $('#top-info-bar').addClass('in-view');
@@ -266,12 +282,55 @@ $(document).ready(function() {
     }
 
     function closeOverlay(){
-        $('html').removeClass('is-overlay');
-        $('.film-ajax-container').removeAttr('style');
-        $('.film-ajax-container').removeClass('-overlay-active');
-        setTimeout( function() {
-            $('body').removeAttr('style');
-        }, 200);
+        $('.film-overlay-content').transition({
+            opacity: 0,
+            duration: 400,
+            complete: function() {
+                $('html').removeClass('is-overlay');
+                $('.film-ajax-container').removeAttr('style');
+                $('.film-ajax-container').removeClass('-overlay-active');
+                removeVideo();
+                setTimeout( function() {
+                    $('body').removeAttr('style');
+                }, 200);
+            }
+        });
+    }
+
+    //load overlay
+    var History;
+
+    if (history.pushState) {
+        History = window.History;
+
+        function loadVideo(url){
+            History.pushState('','', url.attr('href'));
+
+            String.prototype.decodeHTML = function() {
+                return $("<div>", {html: "" + this}).html();
+            }
+
+            $('.film-ajax-container').load(url.attr('href') + ' .film-overlay-content', function(response) {
+                document.title = response.match(/<title>(.*?)<\/title>/)[1].trim().decodeHTML();
+                $('.film-overlay-content').transition({ opacity: 1 }, 400, "easeInOutQuint");
+                $('html').removeClass('loading');
+            });
+        }
+
+        function removeVideo(){
+            History.pushState('','', '/');
+            $('.film-ajax-container').remove('.film-overlay-content');
+            document.title = 'Alex Coppola — Filmography';
+        }
+    }
+
+    //history
+    if (history.pushState) {
+        History.Adapter.bind(window,'statechange',function(){
+            var State = History.getState();
+
+            // $(document).find('a[href$="' + State.url + '"]').trigger("click");
+        });
     }
 
     //film countdown animation
