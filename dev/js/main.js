@@ -267,6 +267,11 @@ $(document).ready(function() {
     // var currentTitle;
     var homeTitle = $('#page').data('home-title');
 
+    if($('.-overlay-default').length){
+        $('body').css('overflow', 'hidden');
+        $('#top-info-bar').addClass('in-view');
+    }
+
     if (history.pushState) {
 
         $(document).on('click','.vid-content a', function(e){
