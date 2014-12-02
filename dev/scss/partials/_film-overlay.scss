@@ -11,38 +11,63 @@
     transition: all 0.4s cubic-bezier(1, 0, 0, 1);
 }
 
+.film-ajax-container h2{
+    color: #FFF;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.25em;
+    margin-top: 0;
+    @include breakpoint(small-tablet){
+        font-size: 2em;
+    }
+}
+
+.film-ajax-container p{
+    color: #FFF;
+    font-size: 0.8em;
+    @include breakpoint(small-tablet){
+        font-size: 1em;
+    }
+}
+
 .film-overlay-wrapper{
-    opacity: 0;
     position: relative;
     height: 100%;
     padding: 1em;
-    /* transition: all 0.6s cubic-bezier(1, 0, 0, 1); */
+    transition: all 0.6s cubic-bezier(1, 0, 0, 1);
 }
 
 .film-overlay-content{
+    opacity: 0;
     box-sizing: border-box;
-    padding: 1em 15% 0 15%;
+    padding: 0 15% 0 15%;
     @extend %vertical-align;
 }
 
 #overlay-close{
     margin: 0 auto;
     color: #FFF;
-    font-size: 1em;
+    font-size: 0.9em;
     position: absolute;
     top: -3em;
     margin-left: (86px / 2) * -1;
     left: 50%;
     text-transform: uppercase;
     cursor: pointer;
-    transition: all 0.2s ease-out;
+    transition: all 0.4s ease-out;
     z-index: 210;
+    @include breakpoint(small-tablet){
+        font-size: 1em;
+    }
 }
 
 .is-overlay{
     #overlay-close{
-        top: 10px;
+        top: 25px;
         transition: all 0.6s ease-in;
+        @include breakpoint(small-tablet){
+            top: 10px;
+        }
     }
 }
 
@@ -50,6 +75,22 @@
     &.-overlay-active{
         //easeOutExpo
         transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+    }
+}
+
+.-overlay-default{
+    .film-ajax-container{
+        transform: scale3d(1, 1, 1);
+    }
+    .film-overlay-content{
+        opacity: 1;
+    }
+    #overlay-close{
+        top: 60px;
+        transition: all 0.6s ease-in;
+        @include breakpoint(small-tablet){
+            top: 10px;
+        }
     }
 }
 
