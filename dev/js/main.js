@@ -341,7 +341,7 @@ $(document).ready(function() {
 
             $('.film-ajax-container').load(url.attr('href') + ' .film-overlay-wrapper', function(response) {
                 document.title = response.match(/<title>(.*?)<\/title>/)[1].trim().decodeHTML();
-                $('.film-overlay-content').transition({ opacity: 1 }, 400, "easeInOutQuint");
+                $('.film-overlay-content').transition({ opacity: 1 }, 400, 'easeInOutQuint');
                 $('html').removeClass('loading');
             });
         }
