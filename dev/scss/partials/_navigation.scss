@@ -11,7 +11,7 @@ nav{
     padding: 1.1875em 0 1.1875em 0;
     //easeInBack
     transition: all $menuTransition cubic-bezier(0.6, -0.28, 0.735, 0.045);
-    z-index: 500;
+    z-index: 50;
     @include breakpoint(ipad-vert){
         padding: 2.1875em 0 2.1875em 0;
     }

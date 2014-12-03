@@ -39,7 +39,8 @@ $(document).ready(function() {
 
         $('#bar-nav').toggleClass('open');
         if(!isMobile){
-            $('.opacity-overlay').toggleClass('active');
+            $('.opacity-overlay').css('z-index', '38');
+            setTimeout(function() {$('.opacity-overlay').toggleClass('active');}, 100)
         }
 
         if($('.open').length){
@@ -52,34 +53,26 @@ $(document).ready(function() {
         $('.opacity-overlay').click(function() {
             closeMenu();
             $('#bar-nav').removeClass('open');
-            $('.opacity-overlay').removeClass('active');
+            $(this).removeClass('active');
+            setTimeout(function() {$(this).removeAttr('style');}, 100);
+
         });
     });
 
     function openMenu(){
         $('#menu-button span').text('[-]');
-        setTimeout( function() {
-            $('body').css('overflow', 'hidden');
-        }, 400);
-        if(isMobile){
-            freezeContent();
-        }
+        isMobile ? freezeContent() : setTimeout( function() {$('body').css('overflow', 'hidden');}, 400);
         // document.ontouchmove = function(e){ e.preventDefault(); };
     }
 
     function closeMenu(){
         $('#menu-button span').text('[+]');
+        setTimeout(function() {$('.opacity-overlay').removeAttr('style');}, 100);
         if($('.is-overlay').length){
             return;
         }
         else{
-            setTimeout( function() {
-                $('body').removeAttr('style');
-            }, 400);
-        }
-
-        if(isMobile){
-            unFreezeContent();
+            isMobile ? unFreezeContent() : setTimeout(function() {$('body').removeAttr('style');}, 400);
         }
         // document.ontouchmove = function(e){ return true; };
     }
@@ -117,7 +110,6 @@ $(document).ready(function() {
         else{
             $(this).text('Filter [+]');
         }
-
     });
 
     function getScrollDirection(){
@@ -202,7 +194,6 @@ $(document).ready(function() {
 
     function getInfiniteElements(){
         var checkPageInterval = setInterval(function(){
-
             if(pageIndex <= pageTotal){
                 infiniteScroll();
             }
@@ -276,6 +267,7 @@ $(document).ready(function() {
 
     function freezeContent(){
         freezeTop = $(window).scrollTop();
+
         var contentTop = $('#content-wrapper').offset().top;
         var contentLeft = $('#content-wrapper').offset().left;
 
@@ -289,6 +281,7 @@ $(document).ready(function() {
     function unFreezeContent(){
         $('#content-wrapper').removeAttr('style');
         $(document).scrollTop(freezeTop);
+        $container.isotope('layout');
     }
 
     var History;
@@ -393,7 +386,7 @@ $(document).ready(function() {
     if (history.pushState) {
         History.Adapter.bind(window,'statechange',function(){
             var State = History.getState();
-            //prevents statechange from running after a popstate event
+            //prevents statechange from immediately running after a popstate event
             var currentIndex = History.getCurrentIndex();
             var internalLink = (History.getState().data._index == (currentIndex - 1));
             if (!internalLink) {
