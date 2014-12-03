@@ -43,18 +43,19 @@
 
         <div class="opacity-overlay"></div>
 
+        <div id="top-info-bar" class="in-view">
+            <div class="time">00:00:00</div>
+            <div id="overlay-close">Close [X]</div>
+            <div class="social">
+                <ul>
+                    <li><a href="#">Vimeo</a></li>
+                    <li><a href="#">Youtube</a></li>
+                    <li><a href="#">Facebook</a></li>
+                </ul>
+            </div>
+        </div><!--/top-info-bar-->
+
         <div id="content-wrapper">
-            <div id="top-info-bar" class="in-view">
-                <div class="time">00:00:00</div>
-                <div id="overlay-close">Close [X]</div>
-                <div class="social">
-                    <ul>
-                        <li><a href="#">Vimeo</a></li>
-                        <li><a href="#">Youtube</a></li>
-                        <li><a href="#">Facebook</a></li>
-                    </ul>
-                </div>
-            </div><!--/top-info-bar-->
 
             <div id="filter-wrapper">
                 <div id="filter-container">
@@ -91,7 +92,7 @@
                     </article>
                     <article class="vid-iso-grid -half">
                         <div class="vid-content">
-                            <a href="http://0.0.0.0:9000/films/film-example-2.html">
+                            <a href="http://0.0.0.0:9000/films/film-example-1.html">
                                 <div class="play-icon">[>]</div>
                                 <img
                                 data-sizes="auto"
@@ -122,21 +123,22 @@
                 </div>
             </div>
 
-            <div class="film-ajax-container -overlay-active">
-                <div class="film-overlay-wrapper">
-                    <div class="film-overlay-content">
-                        <h2>Film Title</h2>
-                        <div class='video-container'><iframe src='http://player.vimeo.com/video/102979655?api=1&autoplay=1&portrait=0&badge=0&byline=0&title=0&color=FFFFFF' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi labore aut eaque aspernatur voluptatibus eius aperiam, a repellendus voluptates voluptatem, quas libero suscipit, porro illum, veniam sapiente accusantium. Quod, aliquam.</p>
-                        </div>
-                </div>
-            </div>
-
             <div class="infinite-scroll-loader">
                 <p>Loading&hellip;</p>
             </div>
 
         </div><!--/content-wrapper-->
+
+        <div class="film-ajax-container -overlay-active">
+            <div class="film-overlay-wrapper">
+                <div class="film-overlay-content">
+                    <h2>Film Title</h2>
+                    <div class='video-container'><iframe src='http://player.vimeo.com/video/102979655?api=1&autoplay=1&portrait=0&badge=0&byline=0&title=0&color=FFFFFF' frameborder='0' webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe></div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi labore aut eaque aspernatur voluptatibus eius aperiam, a repellendus voluptates voluptatem, quas libero suscipit, porro illum, veniam sapiente accusantium. Quod, aliquam.</p>
+                </div>
+            </div>
+        </div>
+
     </div><!--/wrapper-->
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
