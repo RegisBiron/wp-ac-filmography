@@ -1,12 +1,12 @@
 .film-ajax-container{
     background: #000;
-    transform: scale3d(0, 0, 0);
+    transform: scale(0);
     position: fixed;
     width: 80%;
     top: 0;
     right: 0;
     bottom: 0;
-    z-index: 35;
+    z-index: 38;
     //easeInExpo
     transition: all 0.4s cubic-bezier(1, 0, 0, 1);
     overflow-y: scroll;
