@@ -29,8 +29,9 @@
     color: #FFF;
     font-size: 0.8em;
     font-family: $secondFont;
+    font-weight: 300;
     @include breakpoint(small-tablet){
-        font-size: (14em / 16);
+        font-size: (16em / 16);
         padding-top: 2em;
     }
 }
@@ -69,6 +70,31 @@
     z-index: 40;
     @include breakpoint(small-tablet){
         font-size: 1em;
+    }
+}
+
+.next-prev{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding: 1em 1em 1.25em 1em;
+    box-sizing: border-box;
+    a{
+        color: #FFF;
+        font-size: (12em / 16);
+        @include breakpoint(ipad-vert){
+            font-size: 1em;
+        }
+    }
+    #prev{
+        display: block;
+        float: left;
+    }
+    #next{
+        display: block;
+        float: right;
     }
 }
 

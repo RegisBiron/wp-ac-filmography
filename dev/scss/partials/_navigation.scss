@@ -29,6 +29,7 @@ nav{
         font-size: (20em / 16);
         font-weight: 400;
         line-height: 1.25em;
+        font-family: $secondFont;
         //easeOutCubic
         transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
         &:hover{
@@ -140,7 +141,7 @@ nav.open #title{
     font-weight: 400;
     font-size: (12em / 16);
     @include breakpoint(ipad-horiz){
-        font-size: 0.9em;
+        font-size: 0.8em;
     }
     a{
         border-bottom: 1px solid #000;

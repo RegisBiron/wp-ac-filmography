@@ -18,6 +18,40 @@ $(document).ready(function() {
         isMobile = true;
     }
 
+    function digitalClapBoardClock(){
+        var d = new Date();
+        var hours = d.getHours();
+        var minutes = d.getMinutes();
+        var seconds = d.getSeconds();
+        var milliseconds = d.getMilliseconds();
+
+        if(seconds < 10){
+            seconds = '0' + seconds;
+        }
+
+        if(minutes < 10){
+            minutes = '0' + minutes;
+        }
+
+        if(hours > 12) {
+            hours = hours - 12;
+        }
+
+        if(hours < 10){
+            hours = '0' + hours;
+        }
+
+        if(hours === 0){
+            hours = 12;
+        }
+
+        var timeDiv = document.getElementsByClassName('time');
+        timeDiv[0].innerText = hours + ':' + minutes + ':' + seconds + ':' + Math.floor(milliseconds * .1);
+    }
+
+    setInterval(digitalClapBoardClock, 1);
+    // digitalClapBoardClock();
+
     //set baseURL for now, remove in wp
     $('#title').attr('href', baseUrl + '/');
 
@@ -55,7 +89,6 @@ $(document).ready(function() {
             $('#bar-nav').removeClass('open');
             $(this).removeClass('active');
             setTimeout(function() {$(this).removeAttr('style');}, 100);
-
         });
     });
 
@@ -288,6 +321,7 @@ $(document).ready(function() {
     var ajaxLink;
     // var currentTitle;
     var homeTitle = $('#page').data('home-title');
+    var loadingTitle = 'Loading...';
 
     if($('.-overlay-default').length){
         $('body').css('overflow', 'hidden');
@@ -298,9 +332,24 @@ $(document).ready(function() {
         e.preventDefault();
         // currentTitle = document.title;
         // console.log(currentTitle);
+        document.title = loadingTitle;
         ajaxLink = $(this);
         $('html').addClass('loading');
         openOverlay();
+    });
+
+    //next prev navigation
+    $(document).on('click','.next-prev a', function(e){
+        e.preventDefault();
+        document.title = loadingTitle;
+        ajaxLink = $(this);
+        $('.film-overlay-content').transition({
+            opacity: 0,
+            duration: 200,
+            complete: function() {
+                loadVideo(ajaxLink);
+            }
+        });
     });
 
     $('#overlay-close').on('click', function(e){
