@@ -39,7 +39,7 @@ $(document).ready(function() {
 
         $('#bar-nav').toggleClass('open');
         if(!isMobile){
-            $('.opacity-overlay').css('z-index', '40');
+            $('.opacity-overlay').css('z-index', '41');
             setTimeout(function() {$('.opacity-overlay').toggleClass('active');}, 100)
         }
 
@@ -245,7 +245,7 @@ $(document).ready(function() {
 
                     setTimeout( function() {
                         $('.infinite-scroll-loader').removeClass('-loading-active');
-                    }, 500);
+                    }, 800);
                 }
 
                 pageIndex++;
@@ -336,14 +336,17 @@ $(document).ready(function() {
 
     function closeOverlay(){
         $('#top-info-bar').removeAttr('style');
+        $('#overlay-close').transition({ top: -30 }, 200, 'ease-in');
         $('.film-overlay-content').transition({
             opacity: 0,
-            duration: 400,
+            duration: 200,
             complete: function() {
-                $('html').removeClass('is-overlay');
-                $('.film-ajax-container').removeAttr('style');
-                $('.film-ajax-container').removeClass('-overlay-active');
                 removeVideo();
+                $('.film-ajax-container').removeClass('-overlay-active');
+                $('html').removeClass('is-overlay');
+                $('#overlay-close').removeAttr('style');
+
+                $('.film-ajax-container').removeAttr('style');
                 if($('.-overlay-default').length){
                     $('#page').removeClass('-overlay-default');
                 }
@@ -369,7 +372,7 @@ $(document).ready(function() {
 
         $('.film-ajax-container').load(url.attr('href') + ' .film-overlay-wrapper', function(response) {
             document.title = response.match(/<title>(.*?)<\/title>/)[1].trim().decodeHTML();
-            $('.film-overlay-content').transition({ opacity: 1 }, 400, 'easeInOutQuint');
+            $('.film-overlay-content').transition({ opacity: 1 }, 600, 'easeInQuint');
             $('html').removeClass('loading');
         });
     }
