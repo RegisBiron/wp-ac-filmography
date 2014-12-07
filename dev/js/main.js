@@ -18,6 +18,12 @@ $(document).ready(function() {
         isMobile = true;
     }
 
+    var ua = navigator.userAgent.toLowerCase();
+    var isAndroid = ua.indexOf("android") > -1;
+    if(isAndroid) {
+        $('body').addClass('is-android');
+    }
+
     function digitalClapBoardClock(){
         var d = new Date();
         var hours = d.getHours();
@@ -315,6 +321,7 @@ $(document).ready(function() {
         $('#content-wrapper').removeAttr('style');
         $(document).scrollTop(freezeTop);
         $container.isotope('layout');
+        $('body').removeAttr('style');
     }
 
     var History;
