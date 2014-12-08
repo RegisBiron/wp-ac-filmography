@@ -52,7 +52,8 @@ $(document).ready(function() {
         }
 
         var timeDiv = document.getElementsByClassName('time');
-        timeDiv[0].innerText = hours + ':' + minutes + ':' + seconds + ':' + Math.floor(milliseconds * .1);
+        //ff does not use the .innerText property, use .textContent instead
+        timeDiv[0].textContent = hours + ':' + minutes + ':' + seconds + ':' + Math.floor(milliseconds * .1);
     }
 
     setInterval(digitalClapBoardClock, 1);
@@ -328,7 +329,6 @@ $(document).ready(function() {
     var ajaxLink;
     // var currentTitle;
     var homeTitle = $('#page').data('home-title');
-    var loadingTitle = 'Loading...';
 
     if($('.-overlay-default').length){
         $('body').css('overflow', 'hidden');
@@ -339,7 +339,6 @@ $(document).ready(function() {
         e.preventDefault();
         // currentTitle = document.title;
         // console.log(currentTitle);
-        document.title = loadingTitle;
         ajaxLink = $(this);
         $('html').addClass('loading');
         openOverlay();
@@ -348,8 +347,8 @@ $(document).ready(function() {
     //next prev navigation
     $(document).on('click','.next-prev a', function(e){
         e.preventDefault();
-        document.title = loadingTitle;
         ajaxLink = $(this);
+        $('html').addClass('loading');
         $('.film-overlay-content').transition({
             opacity: 0,
             duration: 200,
@@ -359,7 +358,7 @@ $(document).ready(function() {
         });
     });
 
-    $('#overlay-close').on('click', function(e){
+    $(document).on('click', '#overlay-close, #overlay-close-mobile', function(e){
         e.preventDefault();
         closeOverlay();
     });
@@ -447,7 +446,7 @@ $(document).ready(function() {
         var currentIndex = History.getCurrentIndex();
         var internalLink = (History.getState().data._index == (currentIndex - 1));
         if (!internalLink) {
-            console.log(State);
+            // console.log(State);
             $(document).find('a[href$="' + State.url + '"]').trigger('click');
         }
     });

@@ -46,6 +46,7 @@ html.is-overlay{
     font-size: 0.8em;
     font-family: $secondFont;
     font-weight: 300;
+    padding-top: 1em;
     @include breakpoint(small-tablet){
         font-size: (16em / 16);
         padding-top: 2em;
@@ -72,20 +73,35 @@ html.is-overlay{
     }
 }
 
+#overlay-close,
+#overlay-close-mobile{
+    font-size: 0.9em;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: #FFF;
+}
+
 #overlay-close{
     margin: 0 auto;
-    color: #FFF;
-    font-size: 0.9em;
     position: absolute;
     top: -3em;
     margin-left: (86px / 2) * -1;
     left: 50%;
-    text-transform: uppercase;
-    cursor: pointer;
     transition: all 0.2s ease-out;
     z-index: 40;
+    display: none;
     @include breakpoint(small-tablet){
+        display: block;
         font-size: 1em;
+    }
+}
+
+#overlay-close-mobile{
+    display: block;
+    padding: 0 0 3em 0;
+    text-align: center;
+    @include breakpoint(small-tablet){
+        display: none;
     }
 }
 
@@ -114,9 +130,26 @@ html.is-overlay{
     }
 }
 
+span.arrow{
+    display: inline-block;
+    //easeOutCubic
+    transition: all 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.no-touch{
+    .next-prev a{
+        &:hover{
+            span.arrow{
+                padding: 0 0.25em 0 0.25em;
+                //eastInCubic
+                transition: all 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+            }
+        }
+    }
+}
+
 .is-overlay{
     #overlay-close{
-        top: 60px;
         transition: all 0.4s ease-in;
         @include breakpoint(small-tablet){
             top: 12px;
@@ -139,7 +172,6 @@ html.is-overlay{
         opacity: 1;
     }
     #overlay-close{
-        top: 60px;
         transition: all 0.6s ease-in;
         @include breakpoint(small-tablet){
             top: 12px;

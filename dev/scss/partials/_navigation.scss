@@ -17,6 +17,15 @@ nav{
     }
 }
 
+body.is-android{
+    nav{
+        transition: all $menuTransition ease-out;
+    }
+    nav.open{
+        transition: all $menuTransition ease-in;
+    }
+}
+
 #main-menu{
     padding: 0;
     margin: 0;
