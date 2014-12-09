@@ -13,6 +13,22 @@
     -webkit-overflow-scrolling: touch;
 }
 
+.no-csstransforms3d{
+    .film-ajax-container{
+        opacity: 0;
+        z-index: 1;
+    }
+}
+
+.no-csstransforms3d{
+    .-overlay-default{
+        .film-ajax-container{
+            opacity: 1;
+            z-index: 38;
+        }
+    }
+}
+
 body.is-android{
     .film-ajax-container{
         opacity: 0;
@@ -25,6 +41,16 @@ html.is-overlay{
         .film-ajax-container{
             opacity: 1;
             z-index: 38;
+        }
+    }
+}
+
+html.no-touch{
+    .film-ajax-container a{
+        transition: color 0.4s ease-out;
+        &:hover{
+            color: #9d9d9d;
+            transition: color 0.4s ease-in;
         }
     }
 }
@@ -96,6 +122,14 @@ html.is-overlay{
     }
 }
 
+html.no-touch{
+    #overlay-close{
+        &:hover{
+            color: #9d9d9d;
+        }
+    }
+}
+
 #overlay-close-mobile{
     display: block;
     padding: 0 0 3em 0;
@@ -127,24 +161,6 @@ html.is-overlay{
     #next{
         display: block;
         float: right;
-    }
-}
-
-span.arrow{
-    display: inline-block;
-    //easeOutCubic
-    transition: all 0.6s cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-
-.no-touch{
-    .next-prev a{
-        &:hover{
-            span.arrow{
-                padding: 0 0.25em 0 0.25em;
-                //eastInCubic
-                transition: all 0.3s cubic-bezier(0.55, 0.055, 0.675, 0.19);
-            }
-        }
     }
 }
 

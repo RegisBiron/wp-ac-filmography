@@ -39,21 +39,21 @@ $(document).ready(function() {
             minutes = '0' + minutes;
         }
 
-        if(hours > 12) {
-            hours = hours - 12;
+        if(hours < 10 && hours !== 0){
+            hours = '0' + hours;
         }
 
-        if(hours < 10){
-            hours = '0' + hours;
+        if(hours > 12) {
+            hours = hours - 12;
         }
 
         if(hours === 0){
             hours = 12;
         }
 
-        var timeDiv = document.getElementsByClassName('time');
-        //ff does not use the .innerText property, use .textContent instead
-        timeDiv[0].textContent = hours + ':' + minutes + ':' + seconds + ':' + Math.floor(milliseconds * .1);
+        var $time = $('.time');
+
+        $time.html(hours + ':' + minutes + ':' + seconds + ':' + Math.floor(milliseconds * .1));
     }
 
     setInterval(digitalClapBoardClock, 1);
@@ -168,9 +168,13 @@ $(document).ready(function() {
     }
 
     if($('#content-wrapper').length && isMobile){
-        var $loadIndicator = $('<div class=\"load-indicator\"><p>&uarr; Pull Up To Load More</p></div>');
+        var $loadIndicator = $('<div class=\"load-more\"><a href=\"#\">Load More Videos</a></div>');
         $('#content-wrapper').append($loadIndicator);
     }
+
+    $(document).on('click','.load-more a[href="#"]', function(e){
+        infiniteScroll();
+    });
 
     $(document).scroll(function () {
 
@@ -196,16 +200,14 @@ $(document).ready(function() {
             }
         }
 
-        if(pageIndex <= pageTotal){
+        if(!isMobile && pageIndex <= pageTotal){
             if(currPos == (docHeight - winHeight)){
                 infiniteScroll();
             }
         }
-        else{
-            if($('.load-indicator').length){
-                $('.load-indicator').remove();
-            }
-            return;
+
+        if(pageIndex === (pageTotal + 1) && isMobile){
+            $('.load-more').remove();
         }
 
     });
@@ -335,121 +337,125 @@ $(document).ready(function() {
         $('#top-info-bar').addClass('in-view');
     }
 
-    $(document).on('click','.vid-content a', function(e){
-        e.preventDefault();
-        // currentTitle = document.title;
-        // console.log(currentTitle);
-        ajaxLink = $(this);
-        $('html').addClass('loading');
-        openOverlay();
-    });
+    if(Modernizr.history){
 
-    //next prev navigation
-    $(document).on('click','.next-prev a', function(e){
-        e.preventDefault();
-        ajaxLink = $(this);
-        $('html').addClass('loading');
-        $('.film-overlay-content').transition({
-            opacity: 0,
-            duration: 200,
-            complete: function() {
-                loadVideo(ajaxLink);
-            }
+        $(document).on('click','.vid-content a', function(e){
+            e.preventDefault();
+            // currentTitle = document.title;
+            // console.log(currentTitle);
+            ajaxLink = $(this);
+            $('html').addClass('loading');
+            openOverlay();
         });
-    });
 
-    $(document).on('click', '#overlay-close, #overlay-close-mobile', function(e){
-        e.preventDefault();
-        closeOverlay();
-    });
+        //next prev navigation
+        $(document).on('click','.next-prev a', function(e){
+            e.preventDefault();
+            ajaxLink = $(this);
+            $('html').addClass('loading');
+            $('.film-overlay-content').transition({
+                opacity: 0,
+                duration: 200,
+                complete: function() {
+                    loadVideo(ajaxLink);
+                }
+            });
+        });
 
-    $('#title').on('click', function(e){
-        e.preventDefault();
-        if($('.is-overlay').length || $('.-overlay-default').length){
+        $(document).on('click', '#overlay-close, #overlay-close-mobile', function(e){
+            e.preventDefault();
             closeOverlay();
-        }
-    });
+        });
 
-    function openOverlay(){
-        $('html').addClass('is-overlay');
-        $('.film-ajax-container').addClass('-overlay-active');
-        $('.film-ajax-container').transition({
-            scale: 1,
-            complete: function() {
-                loadVideo(ajaxLink);
-                $('#top-info-bar').css('background', 'none');
+        $('#title').on('click', function(e){
+            e.preventDefault();
+            if($('.is-overlay').length || $('.-overlay-default').length){
+                closeOverlay();
             }
         });
-        $('#top-info-bar').addClass('in-view');
-        setTimeout( function() {
-            $('body').css('overflow', 'hidden');
-        }, 600);
-        if(isMobile && ($('.is-overlay').length || $('.-overlay-default').length)){
-            freezeContent();
+
+        function openOverlay(){
+            $('html').addClass('is-overlay');
+            $('.film-ajax-container').addClass('-overlay-active');
+            $('.film-ajax-container').transition({
+                scale: 1,
+                complete: function() {
+                    loadVideo(ajaxLink);
+                    $('#top-info-bar').css('background', 'none');
+                }
+            });
+            $('#top-info-bar').addClass('in-view');
+            setTimeout( function() {
+                $('body').css('overflow', 'hidden');
+            }, 600);
+            if(isMobile && ($('.is-overlay').length || $('.-overlay-default').length)){
+                freezeContent();
+            }
         }
-    }
 
-    function closeOverlay(){
-        $('#top-info-bar').removeAttr('style');
-        $('#overlay-close').transition({ top: -30 }, 200, 'ease-in');
-        $('.film-overlay-content').transition({
-            opacity: 0,
-            duration: 200,
-            complete: function() {
-                removeVideo();
-                $('.film-ajax-container').removeClass('-overlay-active');
-                $('html').removeClass('is-overlay');
-                $('#overlay-close').removeAttr('style');
+        function closeOverlay(){
+            $('#top-info-bar').removeAttr('style');
+            $('#overlay-close').transition({ top: -30 }, 200, 'ease-in');
+            $('.film-overlay-content').transition({
+                opacity: 0,
+                duration: 200,
+                complete: function() {
+                    removeVideo();
+                    $('.film-ajax-container').removeClass('-overlay-active');
+                    $('html').removeClass('is-overlay');
+                    $('#overlay-close').removeAttr('style');
 
-                $('.film-ajax-container').removeAttr('style');
-                if($('.-overlay-default').length){
-                    $('#page').removeClass('-overlay-default');
+                    $('.film-ajax-container').removeAttr('style');
+                    if($('.-overlay-default').length){
+                        $('#page').removeClass('-overlay-default');
+                    }
+                    setTimeout( function() {
+                        $('body').removeAttr('style');
+                    }, 200);
+                    if(isMobile){
+                        unFreezeContent();
+                    }
                 }
-                setTimeout( function() {
-                    $('body').removeAttr('style');
-                }, 200);
-                if(isMobile){
-                    unFreezeContent();
-                }
+            });
+        }
+
+        //load video overlay
+        History = window.History;
+
+        function loadVideo(url){
+            History.pushState({_index: History.getCurrentIndex()},'', url.attr('href'));
+
+            String.prototype.decodeHTML = function() {
+                return $("<div>", {html: '' + this}).html();
+            }
+
+            $('.film-ajax-container').load(url.attr('href') + ' .film-overlay-wrapper', function(response) {
+                document.title = response.match(/<title>(.*?)<\/title>/)[1].trim().decodeHTML();
+                $('.film-overlay-content').transition({ opacity: 1 }, 600, 'easeInQuint');
+                $('html').removeClass('loading');
+            });
+        }
+
+        function removeVideo(){
+            History.pushState({_index: History.getCurrentIndex()},'', '/');
+            $('.film-overlay-wrapper').remove();
+            // document.title = currentTitle;
+            document.title = homeTitle;
+        }
+
+        //history
+        History.Adapter.bind(window,'statechange',function(){
+            var State = History.getState();
+            //prevents statechange from immediately running after a popstate event
+            var currentIndex = History.getCurrentIndex();
+            var internalLink = (History.getState().data._index == (currentIndex - 1));
+            if (!internalLink) {
+                // console.log(State);
+                $(document).find('a[href$="' + State.url + '"]').trigger('click');
             }
         });
+
     }
-
-    //load video overlay
-    History = window.History;
-
-    function loadVideo(url){
-        History.pushState({_index: History.getCurrentIndex()},'', url.attr('href'));
-
-        String.prototype.decodeHTML = function() {
-            return $("<div>", {html: '' + this}).html();
-        }
-
-        $('.film-ajax-container').load(url.attr('href') + ' .film-overlay-wrapper', function(response) {
-            document.title = response.match(/<title>(.*?)<\/title>/)[1].trim().decodeHTML();
-            $('.film-overlay-content').transition({ opacity: 1 }, 600, 'easeInQuint');
-            $('html').removeClass('loading');
-        });
-    }
-
-    function removeVideo(){
-        History.pushState({_index: History.getCurrentIndex()},'', '/');
-        $('.film-overlay-wrapper').remove();
-        // document.title = currentTitle;
-        document.title = homeTitle;
-    }
-
-    //history
-    History.Adapter.bind(window,'statechange',function(){
-        var State = History.getState();
-        //prevents statechange from immediately running after a popstate event
-        var currentIndex = History.getCurrentIndex();
-        var internalLink = (History.getState().data._index == (currentIndex - 1));
-        if (!internalLink) {
-            // console.log(State);
-            $(document).find('a[href$="' + State.url + '"]').trigger('click');
-        }
-    });
 
     //film countdown animation
     // $(function() {
