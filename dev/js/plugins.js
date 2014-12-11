@@ -1,3 +1,18 @@
+(function ($) {
+
+    var currentHref;
+    var url = window.location.protocol + '//' + window.location.host;
+
+    $.fn.baseUrl = function() {
+        this.each(function() {
+            currentHref = $(this).attr('href');
+            $(this).attr('href', url + currentHref);
+        });
+        return this;
+    };
+
+}(jQuery));
+
 /*!
 * Isotope PACKAGED v2.1.0
 * Filter & sort magical layouts

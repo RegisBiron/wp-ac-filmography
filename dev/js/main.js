@@ -14,12 +14,8 @@ pageIndex = 2;
 
 $(document).ready(function() {
 
-    if(navigator.userAgent.match(/(android|iphone|ipad|blackberry|symbian|symbianos|symbos|netfront|model-orange|javaplatform|iemobile|windows phone|samsung|htc|opera mobile|opera mobi|opera mini|presto|huawei|blazer|bolt|doris|fennec|gobrowser|iris|maemo browser|mib|cldc|minimo|semc-browser|skyfire|teashark|teleca|uzard|uzardweb|meego|nokia|bb10|playbook)/gi)){
-        isMobile = true;
-    }
-
     var ua = navigator.userAgent.toLowerCase();
-    var isAndroid = ua.indexOf("android") > -1;
+    var isAndroid = ua.indexOf('android') > -1;
     if(isAndroid) {
         $('body').addClass('is-android');
     }
@@ -39,16 +35,16 @@ $(document).ready(function() {
             minutes = '0' + minutes;
         }
 
-        if(hours < 10 && hours !== 0){
-            hours = '0' + hours;
+        if(hours === 0){
+            hours = 12;
         }
 
         if(hours > 12) {
             hours = hours - 12;
         }
 
-        if(hours === 0){
-            hours = 12;
+        if(hours < 10){
+            hours = '0' + hours;
         }
 
         var $time = $('.time');
@@ -79,7 +75,7 @@ $(document).ready(function() {
         // }
 
         $('#bar-nav').toggleClass('open');
-        if(!isMobile){
+        if($(window).width() > 768){
             $('.opacity-overlay').css('z-index', '41');
             setTimeout(function() {$('.opacity-overlay').toggleClass('active');}, 100)
         }
@@ -95,7 +91,6 @@ $(document).ready(function() {
             closeMenu();
             $('#bar-nav').removeClass('open');
             $(this).removeClass('active');
-            setTimeout(function() {$(this).removeAttr('style');}, 100);
         });
     });
 
@@ -173,6 +168,7 @@ $(document).ready(function() {
     }
 
     $(document).on('click','.load-more a[href="#"]', function(e){
+        e.preventDefault();
         infiniteScroll();
     });
 
@@ -331,6 +327,7 @@ $(document).ready(function() {
     var ajaxLink;
     // var currentTitle;
     var homeTitle = $('#page').data('home-title');
+    var addEntry = false;
 
     if($('.-overlay-default').length){
         $('body').css('overflow', 'hidden');
@@ -341,6 +338,9 @@ $(document).ready(function() {
 
         $(document).on('click','.vid-content a', function(e){
             e.preventDefault();
+            if(e.originalEvent !== undefined){
+                addEntry = true;
+            }
             // currentTitle = document.title;
             // console.log(currentTitle);
             ajaxLink = $(this);
@@ -351,6 +351,10 @@ $(document).ready(function() {
         //next prev navigation
         $(document).on('click','.next-prev a', function(e){
             e.preventDefault();
+            console.log(e.originalEvent);
+            if(e.originalEvent !== undefined){
+                addEntry = true;
+            }
             ajaxLink = $(this);
             $('html').addClass('loading');
             $('.film-overlay-content').transition({
@@ -365,10 +369,16 @@ $(document).ready(function() {
         $(document).on('click', '#overlay-close, #overlay-close-mobile', function(e){
             e.preventDefault();
             closeOverlay();
+            if(e.originalEvent !== undefined){
+                addEntry = true;
+            }
         });
 
         $('#title').on('click', function(e){
             e.preventDefault();
+            if(e.originalEvent !== undefined){
+                addEntry = true;
+            }
             if($('.is-overlay').length || $('.-overlay-default').length){
                 closeOverlay();
             }
@@ -423,7 +433,10 @@ $(document).ready(function() {
         History = window.History;
 
         function loadVideo(url){
-            History.pushState({_index: History.getCurrentIndex()},'', url.attr('href'));
+
+            if(addEntry){
+                History.pushState({_index: History.getCurrentIndex()},'', url.attr('href'));
+            }
 
             String.prototype.decodeHTML = function() {
                 return $("<div>", {html: '' + this}).html();
@@ -433,11 +446,14 @@ $(document).ready(function() {
                 document.title = response.match(/<title>(.*?)<\/title>/)[1].trim().decodeHTML();
                 $('.film-overlay-content').transition({ opacity: 1 }, 600, 'easeInQuint');
                 $('html').removeClass('loading');
+                addEntry = false;
             });
         }
 
         function removeVideo(){
-            History.pushState({_index: History.getCurrentIndex()},'', '/');
+            if(addEntry){
+                History.pushState({_index: History.getCurrentIndex()},'', '/');
+            }
             $('.film-overlay-wrapper').remove();
             // document.title = currentTitle;
             document.title = homeTitle;
@@ -450,8 +466,9 @@ $(document).ready(function() {
             var currentIndex = History.getCurrentIndex();
             var internalLink = (History.getState().data._index == (currentIndex - 1));
             if (!internalLink) {
-                // console.log(State);
-                $(document).find('a[href$="' + State.url + '"]').trigger('click');
+                if(!addEntry){
+                    $(document).find('a[href$="' + State.url + '"]').trigger('click');
+                }
             }
         });
 
