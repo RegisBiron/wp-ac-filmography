@@ -279,7 +279,7 @@ $(document).ready(function() {
                     //relayout isotope
                     setTimeout( function() {
                         $container.isotope('layout');
-                    }, 100);
+                    }, 300);
 
                     setTimeout( function() {
                         $('.infinite-scroll-loader').removeClass('-loading-active');
@@ -351,7 +351,6 @@ $(document).ready(function() {
         //next prev navigation
         $(document).on('click','.next-prev a', function(e){
             e.preventDefault();
-            console.log(e.originalEvent);
             if(e.originalEvent !== undefined){
                 addEntry = true;
             }
@@ -438,11 +437,10 @@ $(document).ready(function() {
                 History.pushState({_index: History.getCurrentIndex()},'', url.attr('href'));
             }
 
-            String.prototype.decodeHTML = function() {
-                return $("<div>", {html: '' + this}).html();
-            }
-
             $('.film-ajax-container').load(url.attr('href') + ' .film-overlay-wrapper', function(response) {
+                String.prototype.decodeHTML = function() {
+                    return $("<div>", {html: '' + this}).html();
+                }
                 document.title = response.match(/<title>(.*?)<\/title>/)[1].trim().decodeHTML();
                 $('.film-overlay-content').transition({ opacity: 1 }, 600, 'easeInQuint');
                 $('html').removeClass('loading');
