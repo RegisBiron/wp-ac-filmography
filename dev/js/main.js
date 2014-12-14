@@ -14,11 +14,29 @@ pageIndex = 2;
 
 $(document).ready(function() {
 
+    if(navigator.userAgent.match(/(android|iphone|ipad|blackberry|symbian|symbianos|symbos|netfront|model-orange|javaplatform|iemobile|windows phone|samsung|htc|opera mobile|opera mobi|opera mini|presto|huawei|blazer|bolt|doris|fennec|gobrowser|iris|maemo browser|mib|cldc|minimo|semc-browser|skyfire|teashark|teleca|uzard|uzardweb|meego|nokia|bb10|playbook)/gi)){
+        isMobile = true;
+    }
+
     var ua = navigator.userAgent.toLowerCase();
     var isAndroid = ua.indexOf('android') > -1;
     if(isAndroid) {
         $('body').addClass('is-android');
     }
+
+    //film countdown animation
+    // $(function() {
+    //     filmCountDown();
+    //     function filmCountDown(){
+    //         console.log(countDownNum[countDown]);
+    //             timer = setTimeout(function() {
+    //             if(countDown <= countDownNum.length - 2){
+    //                 countDown++;
+    //                 filmCountDown();
+    //             }
+    //         }, 1000);
+    //     }
+    // });
 
     function digitalClapBoardClock(){
         var d = new Date();
@@ -52,8 +70,8 @@ $(document).ready(function() {
         $time.html(hours + ':' + minutes + ':' + seconds + ':' + Math.floor(milliseconds * .1));
     }
 
-    setInterval(digitalClapBoardClock, 1);
-    // digitalClapBoardClock();
+    // setInterval(digitalClapBoardClock, 1);
+    digitalClapBoardClock();
 
     //set baseURL for now, remove in wp
     $('#title').attr('href', baseUrl + '/');
@@ -75,7 +93,7 @@ $(document).ready(function() {
         // }
 
         $('#bar-nav').toggleClass('open');
-        if($(window).width() > 768){
+        if($(window).width() > 768 - 1){
             $('.opacity-overlay').css('z-index', '41');
             setTimeout(function() {$('.opacity-overlay').toggleClass('active');}, 100)
         }
@@ -171,6 +189,16 @@ $(document).ready(function() {
         e.preventDefault();
         infiniteScroll();
     });
+
+    //prevents hover effects on film images while scrolling
+    if(!isMobile){
+        $(window).scroll($.debounce(100, true, function(){
+            $('body').addClass('no-hover');
+        }));
+        $(window).scroll($.debounce(100, function(){
+            $('body').removeClass('no-hover');
+        }));
+    }
 
     $(document).scroll(function () {
 
@@ -282,6 +310,10 @@ $(document).ready(function() {
                     }, 300);
 
                     setTimeout( function() {
+                        $container.isotope('layout');
+                    }, 1000);
+
+                    setTimeout( function() {
                         $('.infinite-scroll-loader').removeClass('-loading-active');
                     }, 800);
                 }
@@ -345,6 +377,9 @@ $(document).ready(function() {
             // console.log(currentTitle);
             ajaxLink = $(this);
             $('html').addClass('loading');
+            if(isMobile){
+                $('body').addClass('-loading-icon');
+            }
             openOverlay();
         });
 
@@ -356,6 +391,9 @@ $(document).ready(function() {
             }
             ajaxLink = $(this);
             $('html').addClass('loading');
+            if(isMobile){
+                $('body').addClass('-loading-icon');
+            }
             $('.film-overlay-content').transition({
                 opacity: 0,
                 duration: 200,
@@ -390,7 +428,6 @@ $(document).ready(function() {
                 scale: 1,
                 complete: function() {
                     loadVideo(ajaxLink);
-                    $('#top-info-bar').css('background', 'none');
                 }
             });
             $('#top-info-bar').addClass('in-view');
@@ -433,28 +470,44 @@ $(document).ready(function() {
 
         function loadVideo(url){
 
-            if(addEntry){
-                History.pushState({_index: History.getCurrentIndex()},'', url.attr('href'));
-            }
-
-            $('.film-ajax-container').load(url.attr('href') + ' .film-overlay-wrapper', function(response) {
+            $('.film-ajax-container').load(url.attr('href') + ' .hide-scroll-outer', function(response) {
                 String.prototype.decodeHTML = function() {
                     return $("<div>", {html: '' + this}).html();
                 }
-                document.title = response.match(/<title>(.*?)<\/title>/)[1].trim().decodeHTML();
-                $('.film-overlay-content').transition({ opacity: 1 }, 600, 'easeInQuint');
-                $('html').removeClass('loading');
+
+                var newTitle = response.match(/<title>(.*?)<\/title>/)[1].trim().decodeHTML();
+
+                if(addEntry){
+                    History.pushState({_index: History.getCurrentIndex()}, newTitle, url.attr('href'));
+                }
+
+                $('.film-overlay-content').transition({
+                    opacity: 1,
+                    duration: 600,
+                    easing: 'easeInQuint',
+                    complete: function() {
+                        if(isMobile){
+                            $('body').removeClass('-loading-icon');
+                        }
+                        $('.hide-scroll-inner').css('overflow-y', 'scroll');
+                        $('html').removeClass('loading');
+                    }
+                });
+
+                //remove for wp
+                $('.next-prev a').baseUrl();
+
                 addEntry = false;
             });
         }
 
         function removeVideo(){
             if(addEntry){
-                History.pushState({_index: History.getCurrentIndex()},'', '/');
+                History.pushState({_index: History.getCurrentIndex()}, homeTitle, '/');
             }
             $('.film-overlay-wrapper').remove();
-            // document.title = currentTitle;
-            document.title = homeTitle;
+            //document.title = currentTitle;
+            //document.title = homeTitle;
         }
 
         //history
@@ -471,20 +524,6 @@ $(document).ready(function() {
         });
 
     }
-
-    //film countdown animation
-    // $(function() {
-    //     filmCountDown();
-    //     function filmCountDown(){
-    //         console.log(countDownNum[countDown]);
-    //             timer = setTimeout(function() {
-    //             if(countDown <= countDownNum.length - 2){
-    //                 countDown++;
-    //                 filmCountDown();
-    //             }
-    //         }, 1000);
-    //     }
-    // });
 
     // $(window).resize(function(){
     //     var title = $('#title').offset().left;

@@ -17,12 +17,27 @@
     }
 }
 
+.no-csstransforms3d{
+    .-overlay-default{
+        .film-ajax-container{
+            opacity: 1;
+            z-index: 38;
+        }
+    }
+}
+
 #top-info-bar .time{
     float: left;
-    font-size: (12em / 16);
+    font-size: 0.7em;
     margin: 0;
     padding: 0;
     color: #FFF;
+    @include breakpoint(iphone-vert){
+        padding-top: 0.2em;
+    }
+    @include breakpoint(iphone-horiz){
+        padding-top: 0;
+    }
     @include breakpoint(small-tablet){
         font-size: 0.8em;
     }
@@ -37,7 +52,7 @@
         li{
             display: inline-block;
             a{
-                font-size: (12em / 16);
+                font-size: 0.7em;
                 color: #FFF;
                 text-transform: uppercase;
                 @include breakpoint(small-tablet){
