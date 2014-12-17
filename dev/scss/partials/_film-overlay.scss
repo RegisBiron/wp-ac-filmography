@@ -42,7 +42,6 @@ html.no-touch{
     .hide-scroll-inner::-webkit-scrollbar{
         display: none;
     }
-
 }
 
 html.no-touch{
@@ -128,7 +127,7 @@ html.no-touch{
     position: relative;
     height: 100%;
     padding: 1em;
-    transition: all 0.6s cubic-bezier(1, 0, 0, 1);
+    /* transition: all 0.6s cubic-bezier(1, 0, 0, 1); */
     display: table;
 }
 
@@ -186,27 +185,27 @@ html.no-touch{
 
 .next-prev{
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
     padding: 1em 1em 1.25em 1em;
-    box-sizing: border-box;
+    bottom: 0;
+    @include breakpoint(ipad-vert){
+        position: fixed;
+    }
     a{
         color: #FFF;
         font-size: (12em / 16);
+        display: block;
         @include breakpoint(ipad-vert){
             font-size: 1em;
         }
     }
-    #prev{
-        display: block;
-        float: left;
-    }
-    #next{
-        display: block;
-        float: right;
-    }
+}
+
+#prev{
+    left: 0;
+
+}
+#next{
+    right: 0;
 }
 
 .is-overlay{

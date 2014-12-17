@@ -505,7 +505,7 @@ $(document).ready(function() {
             if(addEntry){
                 History.pushState({_index: History.getCurrentIndex()}, homeTitle, '/');
             }
-            $('.film-overlay-wrapper').remove();
+            $('.hide-scroll-outer').remove();
             //document.title = currentTitle;
             //document.title = homeTitle;
         }
