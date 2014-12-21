@@ -263,3 +263,38 @@ html.no-touch{
 .-full{
     width: 100%;
 }
+
+.intro{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background-color: #FFF;
+    z-index: 100;
+    .number-wrapper{
+        position: relative;
+        height: 100%;
+        width: 100%;
+        padding: 1em;
+        display: table;
+    }
+    .countdown{
+        position: relative;
+        display: table-cell;
+        vertical-align: middle;
+        padding: 3em 20% 3em 20%;
+    }
+    .countdown .number{
+        font-size: 26em;
+        color: #000;
+        font-family: $secondFont;
+        font-weight: 600;
+        text-align: center;
+    }
+}
+
+.intro.black{
+    background-color: #000;
+    .countdown .number{
+        color: #FFF;
+    }
+}
