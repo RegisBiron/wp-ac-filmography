@@ -12,6 +12,13 @@ timer,
 baseUrl = window.location.protocol + '//' + window.location.host,
 pageIndex = 2;
 
+//if the page is scrolled on refresh this resets the page for the intro animation
+$(window).on('beforeunload', function(){
+    if($('.intro').length && !isMobile){
+        $(window).scrollTop(0);
+    }
+});
+
 $(document).ready(function() {
 
     if(navigator.userAgent.match(/(android|iphone|ipad|blackberry|symbian|symbianos|symbos|netfront|model-orange|javaplatform|iemobile|windows phone|samsung|htc|opera mobile|opera mobi|opera mini|presto|huawei|blazer|bolt|doris|fennec|gobrowser|iris|maemo browser|mib|cldc|minimo|semc-browser|skyfire|teashark|teleca|uzard|uzardweb|meego|nokia|bb10|playbook)/gi)){
@@ -63,7 +70,7 @@ $(document).ready(function() {
             }
         });
     }
-    else if(isMobile){
+    else{
         $('.intro').hide();
     }
 
@@ -99,8 +106,8 @@ $(document).ready(function() {
         $time.html(hours + ':' + minutes + ':' + seconds + ':' + Math.floor(milliseconds * .1));
     }
 
-    setInterval(digitalClapBoardClock, 1);
-    // digitalClapBoardClock();
+    // setInterval(digitalClapBoardClock, 1);
+    digitalClapBoardClock();
 
     //set baseURL for now, remove in wp
     $('#title').attr('href', baseUrl + '/');
@@ -224,10 +231,10 @@ $(document).ready(function() {
 
     //prevents hover effects on film images while scrolling
     if(!isMobile){
-        $(window).scroll($.debounce(100, true, function(){
+        $(window).scroll($.debounce(250, true, function(){
             $('body').addClass('no-hover');
         }));
-        $(window).scroll($.debounce(100, function(){
+        $(window).scroll($.debounce(250, function(){
             $('body').removeClass('no-hover');
         }));
     }
@@ -472,18 +479,15 @@ $(document).ready(function() {
         }
 
         function closeOverlay(){
-
             $('#top-info-bar').removeAttr('style');
             $('.film-overlay-content').transition({
                 opacity: 0,
                 duration: 200,
                 complete: function() {
                     removeVideo();
-                    $('#overlay-close').transition({ top: '-30px' }, 250, 'ease-in', function() {
-                        $('.film-ajax-container').removeClass('-overlay-active');
+                    $('#overlay-close').transition({ top: -30}, 250, 'ease-out', function() {
                         $('html').removeClass('is-overlay');
                         $('#overlay-close').removeAttr('style');
-
                         $('.film-ajax-container').removeAttr('style');
                         if($('.-overlay-default').length){
                             $('#page').removeClass('-overlay-default');
@@ -494,6 +498,7 @@ $(document).ready(function() {
                         if(isMobile){
                             unFreezeContent();
                         }
+                        $('.film-ajax-container').removeClass('-overlay-active');
                     });
                 }
             });

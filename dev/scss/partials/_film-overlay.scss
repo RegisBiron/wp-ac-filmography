@@ -134,7 +134,7 @@ html.no-touch{
 .film-overlay-content{
     opacity: 0;
     box-sizing: border-box;
-    padding: 4em 15% 4em 15%;
+    padding: 4em 15% 0 15%;
     @include breakpoint(small-tablet){
         position: relative;
         display: table-cell;
@@ -184,9 +184,15 @@ html.no-touch{
 }
 
 .next-prev{
-    position: absolute;
-    padding: 1em 1em 1.25em 1em;
+    position: relative;
+    padding: 0.65em 1em 1.25em 1em;
     bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    overflow: auto;
+    background-color: #000;
+    box-sizing: border-box;
     @include breakpoint(ipad-vert){
         position: fixed;
     }
@@ -201,11 +207,11 @@ html.no-touch{
 }
 
 #prev{
-    left: 0;
+    float: left;
 
 }
 #next{
-    right: 0;
+    float: right;
 }
 
 .is-overlay{
