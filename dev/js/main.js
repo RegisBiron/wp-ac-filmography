@@ -14,7 +14,7 @@ pageIndex = 2;
 
 //if the page is scrolled on refresh this resets the page for the intro animation
 $(window).on('beforeunload', function(){
-    if($('.intro').length && !isMobile){
+    if(!$('.is-overlay').length && !isMobile){
         $(window).scrollTop(0);
     }
 });
@@ -55,7 +55,7 @@ $(document).ready(function() {
                     }
                     else{
                         $intro.transition({opacity: 0}, 800, 'easeInQuad', function() {
-                            $intro.hide();
+                            $intro.remove();
                             $('#bar-nav').transition({margin: 0}, 800, 'easeInOutExpo', function(){
                                 $(this).removeAttr('style');
                                 $('#content-wrapper').transition({padding: 0}, 600, 'easeInOutQuart', function(){
