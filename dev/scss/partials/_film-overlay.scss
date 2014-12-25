@@ -184,25 +184,28 @@ html.no-touch{
 }
 
 .next-prev{
-    position: relative;
+    position: fixed;
     padding: 0.65em 1em 1.25em 1em;
     bottom: 0;
-    left: 0;
     right: 0;
+    left: 0;
     width: 100%;
     overflow: auto;
     background-color: #000;
     box-sizing: border-box;
-    @include breakpoint(ipad-vert){
-        position: fixed;
-    }
     a{
         color: #FFF;
         font-size: (12em / 16);
         display: block;
-        @include breakpoint(ipad-vert){
+        @include breakpoint(ipad-horiz){
             font-size: 1em;
         }
+    }
+}
+
+.is-mobile{
+    .next-prev{
+        position: relative;
     }
 }
 
