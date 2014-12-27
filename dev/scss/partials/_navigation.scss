@@ -153,6 +153,7 @@ nav.open #title{
     font-size: (12em / 16);
     @include breakpoint(ipad-horiz){
         font-size: 0.8em;
+        max-width: 60%;
     }
     a{
         border-bottom: 1px solid #000;
