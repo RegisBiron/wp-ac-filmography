@@ -1,6 +1,9 @@
 //globals
 // var navCounter = 0,
 var isMobile = false,
+$container = $('.vid-iso-container'),
+pageTotal = $('.vid-list').data('page-total'),
+isSafari = false,
 direction,
 lastScroll = 0,
 winHeight,
@@ -9,7 +12,7 @@ currPos,
 countDown = 0,
 countDownNum = ['5', '4', '3', '2', '1'],
 timer,
-baseUrl = window.location.protocol + '//' + window.location.host,
+baseUrl = window.location.protocol + '//' + window.location.host + window.location.pathname,
 pageIndex = 2;
 
 //if the page is scrolled on refresh this resets the page for the intro animation
@@ -24,6 +27,11 @@ $(document).ready(function() {
     if(navigator.userAgent.match(/(android|iphone|ipad|blackberry|symbian|symbianos|symbos|netfront|model-orange|javaplatform|iemobile|windows phone|samsung|htc|opera mobile|opera mobi|opera mini|presto|huawei|blazer|bolt|doris|fennec|gobrowser|iris|maemo browser|mib|cldc|minimo|semc-browser|skyfire|teashark|teleca|uzard|uzardweb|meego|nokia|bb10|playbook)/gi)){
         isMobile = true;
         $('html').addClass('is-mobile');
+    }
+
+    if (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0)
+    {
+        var isSafari = true;
     }
 
     var ua = navigator.userAgent.toLowerCase();
@@ -228,6 +236,7 @@ $(document).ready(function() {
     $(document).on('click','.load-more a[href="#"]', function(e){
         e.preventDefault();
         infiniteScroll();
+        pageIndex++;
     });
 
     //prevents hover effects on film images while scrolling
@@ -266,26 +275,16 @@ $(document).ready(function() {
 
         if(!isMobile && pageIndex <= pageTotal){
             if(currPos == (docHeight - winHeight)){
-                infiniteScroll();
+                if(pageIndex > pageTotal){
+                    return false;
+                }
+                else{
+                    infiniteScroll();
+                }
+                pageIndex++;
             }
         }
 
-        if(pageIndex === (pageTotal + 1) && isMobile){
-            $('.load-more').remove();
-        }
-
-    });
-
-    //isotope
-    var $container = $('.vid-iso-container').isotope({
-        itemSelector: '.vid-iso-grid',
-        transitionDuration: '0.2s',
-        masonry: {
-            columnWidth: '.vid-iso-grid'
-        }
-        // getSortData: {
-        //     category: '[data-category]'
-        // }
     });
 
     //isotope filtering
@@ -307,6 +306,7 @@ $(document).ready(function() {
                 clearInterval(checkPageInterval);
                 $container.isotope('layout');
             }
+            pageIndex++;
         },500);
     }
 
@@ -326,7 +326,6 @@ $(document).ready(function() {
     // }
 
     //infinite scroll
-    var pageTotal = $('.vid-list').data('page-total');
 
     function infiniteScroll(){
 
@@ -358,7 +357,11 @@ $(document).ready(function() {
                     }, 800);
                 }
 
-                pageIndex++;
+                if(isMobile){
+                    if(pageIndex > pageTotal){
+                        $('.load-more').remove();
+                    }
+                }
 
             },
             error: function() {
@@ -505,8 +508,6 @@ $(document).ready(function() {
             });
         }
 
-        $('.next-prev a').baseUrl();
-
         //load video overlay
         History = window.History;
 
@@ -535,9 +536,6 @@ $(document).ready(function() {
                         $('html').removeClass('loading');
                     }
                 });
-
-                //remove for wp
-                $('.next-prev a').baseUrl();
 
                 addEntry = false;
             });
@@ -572,4 +570,18 @@ $(document).ready(function() {
     //     var title = $('#title').offset().left;
     //     console.log(title);
     // });
+});
+
+$(window).load(function() {
+    //isotope
+    $container.isotope({
+        itemSelector: '.vid-iso-grid',
+        transitionDuration: '0.2s',
+        masonry: {
+            columnWidth: '.vid-iso-grid'
+        }
+        // getSortData: {
+        //     category: '[data-category]'
+        // }
+    });
 });

@@ -157,6 +157,7 @@ html.touch{
         z-index: 35;
         width: 100%;
         bottom: -4em;
+        text-transform: capitalize;
         //easeInQuart
         transition: all 0.4s cubic-bezier(0.895, 0.03, 0.685, 0.22);
         h2{

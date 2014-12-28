@@ -1,6 +1,5 @@
 body{
     color: #000;
-    background: #FFF;
     font-family: $mainFont;
     font-size: 16px;
     -webkit-font-smoothing: antialiased;
@@ -9,7 +8,9 @@ body{
 }
 
 html.touch{
-    background-color: #FFF;
+    body{
+        background-color: #FFF;
+    }
 }
 
 ul li{
