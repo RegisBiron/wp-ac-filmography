@@ -71,7 +71,8 @@
                     font-size: (14em / 16);
                     font-weight: 400;
                     text-transform: uppercase;
-                    &:hover{
+                    &:hover,
+                    &.active{
                         border-bottom: 1px solid #000;
                     }
                 }

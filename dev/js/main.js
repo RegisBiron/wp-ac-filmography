@@ -290,8 +290,17 @@ $(document).ready(function() {
     //isotope filtering
     $('.filter-nav ul li a').on( 'click', function(e) {
         e.preventDefault();
+        var $currentLink = $(this);
         var filterValue = $(this).attr('data-filter');
         $container.isotope({ filter: filterValue });
+
+        $('.filter-nav ul li a').not($currentLink).removeClass('active');
+        $currentLink.addClass('active');
+
+        if($currentLink.data('filter') == '*'){
+            $('.filter-nav ul li a[data-filter="*"]').addClass('active');
+        }
+
         if(!$(filterValue).length){
             getInfiniteElements();
         }
