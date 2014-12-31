@@ -113,15 +113,7 @@ html.loading{
     bottom: 0;
     opacity: 0;
     background: #000;
-    transition: all 0.2s ease-out;
+    transition: opacity 0.2s ease-out;
     display: none;
-    @include breakpoint(ipad-vert){
-        display: block;
-        z-index: 10;
-    }
-    &.active{
-        transition: all 0.4s ease-in;
-        opacity: 0.8;
-        z-index: 40;
-    }
+    z-index: 41;
 }
