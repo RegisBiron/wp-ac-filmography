@@ -196,8 +196,8 @@ html.no-touch{
                 transform: scale(1.10);
                 //easeOutQuart
                 transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-                filter: none;
                 opacity: 0.7;
+                filter: none;
             }
             .play-icon{
                 bottom: 50%;

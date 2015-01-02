@@ -182,6 +182,14 @@ module.exports = function (grunt) {
                     cwd: '<%= config.dev %>/images',
                     dest: '<%= config.dist %>/images'
                 }]
+            },
+            styles: {
+                files: [{
+                    expand: true,
+                    src: ['**/*'],
+                    cwd: '<%= config.dev %>/styles',
+                    dest: '/Applications/MAMP/sites/wp/alexcoppola/wp-content/themes/alexcoppola/library/css/'
+                }]
             }
         }
     });

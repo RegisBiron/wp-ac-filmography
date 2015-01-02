@@ -13,7 +13,7 @@
 
 body.-loading-icon{
     .film-ajax-container{
-        background: #000 url("../images/film-spin-icon.svg") center center no-repeat;
+        background: #000 url("http://dev.wp/alexcoppola/wp-content/uploads/2015/01/film-spin-icon.svg") center center no-repeat;
     }
 }
 
@@ -38,6 +38,7 @@ html.no-touch{
         margin-right: -2em;
         padding-right: 2em;
         height: 100%;
+        width: 100%;
     }
     .hide-scroll-inner::-webkit-scrollbar{
         display: none;
@@ -50,8 +51,6 @@ html.no-touch{
             position: absolute;
             overflow-x: hidden;
             overflow-y: scroll;
-            margin-right: -2em;
-            padding-right: 2em;
             height: 100%;
         }
     }
@@ -129,12 +128,14 @@ html.no-touch{
     padding: 1em;
     /* transition: all 0.6s cubic-bezier(1, 0, 0, 1); */
     display: table;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .film-overlay-content{
     opacity: 0;
     box-sizing: border-box;
-    padding: 4em 15% 0 15%;
+    padding: 3.5em 15% 0 15%;
     @include breakpoint(small-tablet){
         position: relative;
         display: table-cell;
@@ -176,7 +177,7 @@ html.no-touch{
 
 #overlay-close-mobile{
     display: block;
-    padding: 0 0 3em 0;
+    padding: 0 0 2.75em 0;
     text-align: center;
     @include breakpoint(small-tablet){
         display: none;
