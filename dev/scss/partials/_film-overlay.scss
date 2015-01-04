@@ -1,5 +1,5 @@
 .film-ajax-container{
-    transform: scale3d(0, 0, 0);
+    transform: scale(0, 0);
     position: fixed;
     width: 80%;
     top: 0;
@@ -266,7 +266,7 @@ html.no-touch{
 
 .-overlay-default{
     .film-ajax-container{
-        transform: scale3d(1, 1, 1);
+        transform: scale(1, 1);
     }
     .film-overlay-content{
         opacity: 1;
