@@ -1,0 +1,11 @@
+.about-container{
+    background: #000;
+    width: 80%;
+    height: 100%;
+    right: 0;
+    bottom: -100%;
+    position: fixed;
+    z-index: 38;
+    //eatInExpo
+    transition: all 0.4s cubic-bezier(0.95, 0.05, 0.795, 0.035);
+}

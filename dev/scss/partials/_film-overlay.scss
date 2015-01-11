@@ -296,6 +296,9 @@ body.is-android{
     max-width: 100%;
     height: auto;
     margin-bottom: 2em;
+    @include breakpoint(small-tablet){
+        margin-bottom: 3.5em;
+    }
 }
 
 .video-container iframe,

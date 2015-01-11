@@ -27,7 +27,7 @@
     <!-- hook into wp and use a wp php method to retrieve the title from the front page -->
     <div data-home-title="Alex Coppola — Filmography" id="page">
 
-        <div class="intro">
+        <!-- <div class="intro">
             <div class="number-wrapper">
                 <div class="countdown">
                     <div class="number">
@@ -35,14 +35,20 @@
                     </div>
                 </div>
             </div>
+        </div> -->
+
+        <div class="film-ajax-container">
+        </div>
+
+        <div class="about-container">
         </div>
 
         <nav role="navigation" id="bar-nav">
             <a id="title" class="set-position">Alex Coppola <span>Film[O]graphy</span></a>
             <a href="#" id="menu-button" class="set-position">Menu <span>[+]</span></a>
             <ul id="main-menu">
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a id="about" href="/about/">About</a></li>
+                <li><a id="contact" href="#">Contact</a></li>
             </ul>
             <div class="info-summary">
                 <p>Alex is a video producer based in Portland, ME.<br /><br />
@@ -141,9 +147,6 @@
         </div>
 
         </div><!--/content-wrapper-->
-
-        <div class="film-ajax-container">
-        </div>
 
     </div><!--/page-->
 
