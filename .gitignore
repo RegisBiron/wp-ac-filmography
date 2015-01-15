@@ -4,6 +4,7 @@ node_modules
 .tmp
 dev/styles
 dev/images
+dev/media
 dist
 package.json
 content
