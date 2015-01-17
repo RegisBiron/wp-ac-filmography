@@ -15,6 +15,10 @@
     border-bottom: 10px solid #000;
 }
 
+.reel-content{
+    opacity: 0;
+}
+
 .reel-opacity-overlay{
     position: absolute;
     width: 100%;
@@ -44,6 +48,9 @@ html.is-mobile{
 .-about-default{
     .about-container{
         bottom: 0;
+    }
+    .reel-content{
+        opacity: 1;
     }
 }
 
