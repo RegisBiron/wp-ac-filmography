@@ -246,7 +246,7 @@ $(document).ready(function() {
     });
 
     //prevents hover effects on film images while scrolling
-    if(!isMobile){
+    if(!isMobile && !$('.-overlay-active').length && !$('.-about-active').length){
         $(window).scroll($.debounce(250, true, function(){
             $('body').addClass('no-hover');
         }));
