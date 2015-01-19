@@ -647,7 +647,8 @@ $(document).ready(function() {
                                 History.pushState({_index: History.getCurrentIndex()}, homeTitle, url.attr('href'));
                             }
                             $('.reel-content').remove();
-                            $('html').removeClass('is-about, -about-active');
+                            $('html').removeClass('is-about');
+                            $('.about-container').removeClass('-about-active');
                             addEntry = false;
                         }
                     });
