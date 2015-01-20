@@ -9,7 +9,10 @@ nav{
     top: 0;
     bottom: 0;
     padding: 1.1875em 0 1.1875em 0;
-    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    -webkit-transform-style: preserve-3d;
+    transform: translate3d(0, 0, 0);
     //easeInBack
     transition: all $menuTransition cubic-bezier(0.6, -0.28, 0.735, 0.045);
     z-index: 50;

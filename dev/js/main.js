@@ -177,7 +177,7 @@ $(document).ready(function() {
             return;
         }
         else{
-            if(Modernizr.history){
+            if(Modernizr.history && !$('.-overlay-active').length && !$('.-about-active').length){
                 isMobile ? unFreezeContent() : setTimeout(function() {$('body').removeAttr('style');}, 400);
             }
         }
@@ -687,7 +687,7 @@ $(document).ready(function() {
                     return $("<div>", {html: '' + this}).html();
                 }
 
-                var newTitle = response.match(/<title>(.*?)<\/title>/)[1].trim().decodeHTML();
+                var newTitle = response.match(/<title>(.*?)<\/title>/)[1].trim().decodeHTML().replace(/&amp;/g, '&');
 
                 if(addEntry){
                     History.pushState({_index: History.getCurrentIndex()}, newTitle, url.attr('href'));

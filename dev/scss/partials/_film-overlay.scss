@@ -9,6 +9,8 @@
     //easeInExpo
     transition: transform 0.4s cubic-bezier(1, 0, 0, 1);
     background: #000;
+    backface-visibility: hidden;
+    -webkit-transform-style: preserve-3d;
 }
 
 body.-loading-icon{

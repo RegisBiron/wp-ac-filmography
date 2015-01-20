@@ -141,10 +141,10 @@ html.touch{
 
 .vid-content{
     img{
+        filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\' filterRes=\'800\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+        filter: gray;
         transform: scale(1);
         filter: grayscale(1);
-        filter: gray;
-        filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\' filterRes=\'800\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
         transition: all 0.2s ease-out;
     }
     @include breakpoint(ipad-vert){
@@ -220,10 +220,10 @@ html.no-touch{
         a{
             &:hover{
                 img{
+                    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\' filterRes=\'800\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+                    filter: gray;
                     transform: scale(1);
                     filter: grayscale(1);
-                    filter: gray;
-                    filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\' filterRes=\'800\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
                     opacity: 1;
                 }
                 .play-icon{
@@ -288,11 +288,17 @@ html.no-touch{
         padding: 3em 20% 3em 20%;
     }
     .countdown .number{
-        font-size: 26em;
+        font-size: 14em;
         color: #000;
         font-family: $secondFont;
         font-weight: 600;
         text-align: center;
+        @include breakpoint(ipad-vert){
+            font-size: 18em;
+        }
+        @include breakpoint(ipad-horiz){
+            font-size: 26em;
+        }
     }
 }
 
