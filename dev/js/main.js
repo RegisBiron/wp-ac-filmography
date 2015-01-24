@@ -648,6 +648,7 @@ $(document).ready(function() {
                             }
                             $('.reel-content').remove();
                             $('html').removeClass('is-about');
+                            $('body').removeAttr('style');
                             $('.about-container').removeClass('-about-active');
                             addEntry = false;
                         }
@@ -657,7 +658,7 @@ $(document).ready(function() {
         }
 
         /*
-        * Home Title Close
+         * Home Title Close
         */
 
         $('#title').on('click', function(e){
