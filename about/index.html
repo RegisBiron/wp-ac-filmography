@@ -19,15 +19,26 @@
     <script src="../dev/js/vendor/modernizr-2.8.3.min.js"></script>
     <script src="../dev/js/lazysizes-respimage.min.js" async=""></script>
 </head>
-<body>
+<body style="overflow:hidden;">
     <!--[if lt IE 8]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <div data-home-title="Alex Coppola — Filmography" id="page" class="-about-default">
-        <!-- <div class="reel-opacity-overlay"></div> -->
+
         <div class="about-container -about-active">
             <div class="reel-content">
+                <div class="reel-opacity-overlay"></div>
+                <div class="about-info">
+                    <div class="about-info-content">
+                        <h3>Moving Pictures</h3>
+                        <p>Alex is a multimedia producer specializing in short-form documentary and narrative video.</p>
+                        <h3>Telling Your Story</h3>
+                        <p>In addition to producing independent projects, I partner with individuals and organizations to create videos that give their viewers singular insight into who they are and what they do.<br /><br />
+                        It’s a creative approach to the storytelling process. By combining documentary and narrative elements, we create compelling portraits that look and feel a little different than the typical promotional video.<br /><br />
+                        Whether you know your story already, or still need help finding it, we’ll bring it to life in ways that are both unexpected and distinct.</p>
+                    </div>
+                </div>
                 <div class="reel-video-container">
                     <video id="reel-video" autoplay="true" preload="auto" loop="true">
                         <source src="../dev/media/reel-website-black-and-white.mp4" type="video/mp4">
@@ -58,7 +69,7 @@
 
         <div class="opacity-overlay"></div>
 
-        <div id="top-info-bar" class="in-view">
+        <div id="top-info-bar">
             <div class="time">00:00:00</div>
             <a href="/" id="overlay-close">Close [X]</a>
             <div class="social">

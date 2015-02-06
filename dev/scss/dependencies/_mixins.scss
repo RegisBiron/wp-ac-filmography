@@ -41,3 +41,7 @@
   -ms-transform: translateY(-50%);
   transform: translateY(-50%);
 }
+
+@function em($target, $context: 16) {
+    @return ($target / $context) * 1em;
+}
