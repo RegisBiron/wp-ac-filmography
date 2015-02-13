@@ -330,6 +330,10 @@ $(document).ready(function() {
         vidAspect,
         $reelContainer;
 
+        if($('.reel-opacity-overlay').height() < $('.about-info').height()){
+            console.log(true);
+        }
+
     function resizeVideo(){
         $reelContainer = $('.reel-video-container');
         vidHeight = $('.reel-video-container video').height();
