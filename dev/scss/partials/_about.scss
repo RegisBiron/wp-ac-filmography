@@ -50,13 +50,15 @@
     opacity: 0.8;
 }
 
-.reel-video-container{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-    line-height: 0;
-    z-index: -1;
+html.no-touch{
+    .reel-video-container{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        line-height: 0;
+        z-index: -1;
+    }
 }
 
 html.touch,
@@ -72,6 +74,11 @@ html.is-mobile{
         overflow: auto;
         height: 100%;
         position: relative;
+    }
+    .reel-video-container{
+        position: absolute;
+        top: 0;
+        z-index: -1;
     }
 }
 
@@ -97,6 +104,10 @@ html.is-mobile{
     z-index: 100;
     margin: 0 auto;
     display: table;
+    padding: 1.5em 0 1.5em 0;
+    @include breakpoint(small-tablet){
+        padding: 0;
+    }
     .about-info-content{
         position: relative;
         vertical-align: middle;
