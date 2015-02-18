@@ -355,12 +355,20 @@ $(document).ready(function() {
 
         $(window).resize(function(){
             resizeVideo();
+
+            if($('.about-info').height() < $('.reel-opacity-overlay').height()){
+                $('.about-info-content p').css('font-size', '2.5vh');
+            }
+            else{
+                $('.about-info-content p').removeAttr('style');
+            }
+
         });
     }
     else{
         addMobileBG();
         window.addEventListener("orientationchange", function() {
-            if(bgHeight = true){
+            if(bgHeight === true){
                 addBGHeight();
             }
         }, false);
@@ -604,6 +612,16 @@ $(document).ready(function() {
         * About Section
         */
 
+        //about close
+        $(document).on('click', '#about-close, #about-close-mobile', function(e){
+            e.preventDefault();
+            homeLink = $(this);
+            closeAbout(homeLink);
+            if(e.originalEvent !== undefined){
+                addEntry = true;
+            }
+        });
+
         $(document).on('click', '#main-menu #about', function(e){
             e.preventDefault();
             if(!$('.is-about').length){
@@ -670,14 +688,15 @@ $(document).ready(function() {
         }
 
         function closeAbout(url){
+            //$('#about-close').transition({ bottom: '-3em'}, 400, 'easeOutExpo');
             if(isMobile){
                 $('#top-info-bar').addClass('in-view');
             }
-            $('.reel-content').transition({
-                opacity: 0,
-                duration: 600,
-                easing: 'easeOutExpo',
-                complete: function() {
+            // $('.reel-content').transition({
+            //     opacity: 0,
+            //     duration: 400,
+            //     easing: 'easeOutExpo',
+            //     complete: function() {
                     $('.about-container').transition({
                         bottom: '-100%',
                         duration: 600,
@@ -699,8 +718,8 @@ $(document).ready(function() {
                             addEntry = false;
                         }
                     });
-                }
-            });
+            //     }
+            // });
         }
 
         /*
@@ -713,6 +732,16 @@ $(document).ready(function() {
             if(e.originalEvent !== undefined){
                 addEntry = true;
             }
+
+            //close the menu if it is active
+            if($('#bar-nav').hasClass('open')){
+                closeMenu();
+                $('#bar-nav').removeClass('open');
+                $('.opacity-overlay').css('opacity', '0');
+                setTimeout(function() {$('.opacity-overlay').css('display', 'none');}, 200);
+                $('.opacity-overlay').removeClass('active');
+            }
+
             if($('.is-overlay').length || $('.-overlay-default').length){
                 closeOverlay(homeLink);
             }
@@ -793,14 +822,7 @@ $(document).ready(function() {
                     var checkReadyState = setInterval(function(){
                         if(document.getElementById('reel-video').readyState === 4){
                             clearInterval(checkReadyState);
-                            $('.reel-content').transition({
-                                opacity: 1,
-                                duration: 600,
-                                easing: 'easeInQuint',
-                                complete: function() {
-                                    $('html').removeClass('loading');
-                                }
-                            });
+                            animateReelContent();
                         }
                         else{
                             return;
@@ -808,6 +830,10 @@ $(document).ready(function() {
                     },500);
                 }
                 else{
+                    animateReelContent();
+                }
+
+                function animateReelContent(){
                     $('.reel-content').transition({
                         opacity: 1,
                         duration: 600,
@@ -817,6 +843,7 @@ $(document).ready(function() {
                                 $('body').removeClass('-loading-icon');
                             }
                             $('html').removeClass('loading');
+                            $('#about-close').transition({ bottom: 12}, 400, 'easeOutExpo');
                         }
                     });
                 }

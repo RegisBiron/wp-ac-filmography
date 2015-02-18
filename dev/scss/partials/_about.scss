@@ -114,3 +114,39 @@ html.is-mobile{
         display: table-cell;
     }
 }
+
+#about-close,
+#about-close-mobile{
+    text-transform: uppercase;
+}
+
+#about-close{
+    margin: 0 auto;
+    position: absolute;
+    bottom: -3em;
+    margin-left: -43px;
+    left: 50%;
+    transition: all 0.2s ease-out;
+    z-index: 100;
+    display: none;
+    &:hover{
+        color: #FFF;
+    }
+    @include breakpoint(small-tablet){
+        display: block;
+    }
+}
+
+#about-close-mobile{
+    display: block;
+    padding-top: 1em;
+    text-align: center;
+    font-size: 0.9em;
+    @include breakpoint(small-tablet){
+        display: none;
+    }
+}
+
+.-about-default #about-close{
+    bottom: 12px;
+}
