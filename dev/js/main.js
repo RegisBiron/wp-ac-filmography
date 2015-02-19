@@ -328,7 +328,8 @@ $(document).ready(function() {
     var vidHeight,
         vidWidth,
         vidAspect,
-        $reelContainer;
+        $reelContainer,
+        aboutInfoHeight;
 
     function resizeVideo(){
         $reelContainer = $('.reel-video-container');
@@ -348,26 +349,34 @@ $(document).ready(function() {
         }
     }
 
+    if($('.-about-default').length){
+        aboutInfoHeight = $('.about-info-content').height();
+    }
+
+    function resizeAboutText(){
+
+        if(aboutInfoHeight > $(window).height()){
+            $('.about-info-content p').css('font-size', '2.5vh');
+        }
+        else {
+            $('.about-info-content p').removeAttr('style');
+        }
+    }
+
     if(!isMobile){
         if($('.-about-default').length){
             resizeVideo();
+            resizeAboutText();
         }
 
-        $(window).resize(function(){
+        $(window).on('resize', function(){
             resizeVideo();
-
-            if($('.about-info').height() < $('.reel-opacity-overlay').height()){
-                $('.about-info-content p').css('font-size', '2.5vh');
-            }
-            else{
-                $('.about-info-content p').removeAttr('style');
-            }
-
+            resizeAboutText();
         });
     }
     else{
         addMobileBG();
-        window.addEventListener("orientationchange", function() {
+        window.addEventListener('orientationchange', function() {
             if(bgHeight === true){
                 addBGHeight();
             }
@@ -661,6 +670,9 @@ $(document).ready(function() {
                     freezeContent();
                 }
             }
+            else if($(this) == window.location.href){
+                return;
+            }
         });
 
         function openAbout(url){
@@ -700,7 +712,7 @@ $(document).ready(function() {
                     $('.about-container').transition({
                         bottom: '-100%',
                         duration: 600,
-                        easing: 'easeOutExpo',
+                        easing: 'easeOutQuint',
                         complete: function() {
                             if(!isMobile){
                                 $('#top-info-bar').addClass('in-view');
@@ -810,7 +822,9 @@ $(document).ready(function() {
                 }
 
                 if(!isMobile){
+                    aboutInfoHeight = $('.about-info-content').height();
                     resizeVideo();
+                    resizeAboutText();
                 }
                 else{
                     $('html').find('video').remove();

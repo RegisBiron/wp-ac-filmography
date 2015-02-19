@@ -99,7 +99,7 @@ html.is-mobile{
 
 .about-info{
     position: relative;
-    width: 57%;
+    width: 80%;
     height: 100%;
     z-index: 100;
     margin: 0 auto;
@@ -108,10 +108,39 @@ html.is-mobile{
     @include breakpoint(small-tablet){
         padding: 0;
     }
+    @include breakpoint(ipad-vert){
+        width: 57%;
+    }
     .about-info-content{
         position: relative;
         vertical-align: middle;
         display: table-cell;
+    }
+}
+
+.about-info{
+    ul{
+        margin: 0;
+        padding: 1em 0 1em 0;
+        position: relative;
+        li{
+            display: inline-block;
+            list-style: none;
+            padding-right: 0.5em;
+        }
+    }
+    a{
+        text-transform: uppercase;
+        font-weight: 600;
+        transition: all 0.2s ease-out;
+        font-size: 0.9em;
+        &:hover{
+            color: #FFF;
+            transition: all 0.2s ease-in;
+        }
+        @include breakpoint(ipad-vert){
+            font-size: 1em;
+        }
     }
 }
 
