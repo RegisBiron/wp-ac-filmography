@@ -230,7 +230,7 @@ html.no-touch{
         color: #FFF;
         font-size: (12em / 16);
         display: block;
-        @include breakpoint(ipad-horiz){
+        @include breakpoint(ipad-vert){
             font-size: 1em;
         }
     }

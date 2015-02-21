@@ -124,9 +124,16 @@ html.is-mobile{
         padding: 1em 0 1em 0;
         position: relative;
         li{
-            display: inline-block;
+            display: block;
             list-style: none;
-            padding-right: 0.5em;
+            text-align: center;
+            padding-bottom: 0.5em;
+            @include breakpoint(ipad-vert){
+                display: inline-block;
+                text-align: left;
+                padding-right: 0.5em;
+                padding-bottom: 0;
+            }
         }
     }
     a{
@@ -177,5 +184,8 @@ html.is-mobile{
 }
 
 .-about-default #about-close{
-    bottom: 12px;
+    bottom: 25px;
+    @include breakpoint(laptop){
+        bottom: 12px;
+    }
 }
