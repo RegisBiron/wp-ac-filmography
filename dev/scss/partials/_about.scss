@@ -16,6 +16,7 @@
 .about-container h3{
     text-transform: uppercase;
     font-size: em(18);
+    margin-top: 0;
     @include breakpoint(tablet-vert){
         font-size: em(24);
     }
@@ -28,6 +29,7 @@
     font-weight: 400;
     margin: 0;
     line-height: 1.25em;
+    padding-bottom: 1em;
     @include breakpoint(small-tablet){
         font-size: (16em / 16);
         line-height: 1.4em;
