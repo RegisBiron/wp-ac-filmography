@@ -602,7 +602,7 @@ $(document).ready(function() {
                             $('#page').removeClass('-overlay-default');
                         }
                         if($('.is-about').length){
-                            $('.about-container').addClass('-about-active');
+                            $('.about-ajax-container').addClass('-about-active');
                         }
                         setTimeout( function() {
                             $('body').removeAttr('style');
@@ -680,8 +680,8 @@ $(document).ready(function() {
         });
 
         function openAbout(url){
-            $('.about-container').addClass('-about-active');
-            $('.about-container').transition({
+            $('.about-ajax-container').addClass('-about-active');
+            $('.about-ajax-container').transition({
                 bottom: 0,
                 duration: 600,
                 easing: 'easeOutExpo',
@@ -716,7 +716,7 @@ $(document).ready(function() {
             //     duration: 400,
             //     easing: 'easeOutExpo',
             //     complete: function() {
-                    $('.about-container').transition({
+                    $('.about-ajax-container').transition({
                         bottom: '-100%',
                         duration: 600,
                         easing: 'easeOutQuint',
@@ -733,7 +733,7 @@ $(document).ready(function() {
                             $('.reel-content').remove();
                             $('html').removeClass('is-about');
                             $('body').removeAttr('style');
-                            $('.about-container').removeClass('-about-active');
+                            $('.about-ajax-container').removeClass('-about-active');
                             addEntry = false;
                         }
                     });
@@ -817,7 +817,7 @@ $(document).ready(function() {
 
         //load about content
         function loadAbout(url){
-            $('.about-container').load(url.attr('href') + ' .reel-content', function(response) {
+            $('.about-ajax-container').load(url.attr('href') + ' .reel-content', function(response) {
                 String.prototype.decodeHTML = function() {
                     return $("<div>", {html: '' + this}).html();
                 }

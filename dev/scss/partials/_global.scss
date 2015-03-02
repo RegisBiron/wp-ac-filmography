@@ -122,3 +122,16 @@ html.loading{
 .page-numbers{
     display: none;
 }
+
+body.-loading-icon{
+    .film-ajax-container{
+        background: #000 url("http://dev.wp/alexcoppola/wp-content/uploads/2015/01/film-spin-icon.svg") center center no-repeat;
+    }
+    .about-ajax-container{
+        background: #000 url("http://dev.wp/alexcoppola/wp-content/uploads/2015/01/film-spin-icon.svg") center center no-repeat;
+    }
+}
+
+.temp-link{
+    display: none;
+}

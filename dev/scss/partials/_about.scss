@@ -1,4 +1,4 @@
-.about-container{
+.about-ajax-container{
     background: #000;
     width: 80%;
     height: 100%;
@@ -13,7 +13,7 @@
     border: 10px solid #000;
 }
 
-.about-container h3{
+.about-ajax-container h3{
     text-transform: uppercase;
     font-size: em(18);
     margin-top: 0;
@@ -22,7 +22,7 @@
     }
 }
 
-.about-container p{
+.about-ajax-container p{
     color: #000;
     font-size: 0.8em;
     font-family: $secondFont;
@@ -66,7 +66,7 @@ html.no-touch{
 
 html.touch,
 html.is-mobile{
-    .about-container{
+    .about-ajax-container{
         overflow-y: scroll;
         -webkit-overflow-scrolling: touch;
     }
@@ -94,12 +94,12 @@ html.is-mobile{
 }
 
 .-about-default{
-    .about-container{
+    .about-ajax-container{
         bottom: 0;
     }
 }
 
-.about-container{
+.about-ajax-container{
     video{
         width: 100%;
     }
