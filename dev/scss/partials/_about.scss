@@ -17,9 +17,6 @@
     text-transform: uppercase;
     font-size: em(18);
     margin-top: 0;
-    @include breakpoint(ipad-vert){
-        font-size: em(24);
-    }
 }
 
 .about-ajax-container p{
