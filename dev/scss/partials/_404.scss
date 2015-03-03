@@ -1,0 +1,70 @@
+.error404{
+    #page{
+        display: none;
+    }
+}
+
+.error{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    z-index: 100;
+}
+
+.error-wrapper{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    padding: 1em;
+    display: table;
+    box-sizing: border-box;
+}
+
+.error-content{
+    position: relative;
+    display: table-cell;
+    vertical-align: middle;
+    padding: 3em 20% 3em 20%;
+}
+
+.the-end{
+    font-size: em(52);
+    text-transform: uppercase;
+    color: #FFF;
+    font-family: "Source Sans Pro", Helvetica, sans-serif;
+    font-weight: 600;
+    text-align: center;
+    display: block;
+    @include breakpoint(ipad-vert){
+        font-size: em(96);
+    }
+    @include breakpoint(ipad-horiz){
+        font-size: em(144);
+    }
+    span{
+        cursor: pointer;
+        display: block;
+    }
+}
+
+html.this-is{
+    body{
+        background-color: #FFF;
+    }
+}
+
+html.no-touch{
+    .the-end{
+        &:hover{
+            &:before{
+                content: "This Is";
+                display: block;
+                color: #000;
+                cursor: pointer;
+            }
+            span{
+                display: none;
+            }
+        }
+    }
+}

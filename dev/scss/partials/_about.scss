@@ -17,7 +17,7 @@
     text-transform: uppercase;
     font-size: em(18);
     margin-top: 0;
-    @include breakpoint(tablet-vert){
+    @include breakpoint(ipad-vert){
         font-size: em(24);
     }
 }

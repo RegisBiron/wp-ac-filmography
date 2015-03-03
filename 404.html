@@ -2,59 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Page Not Found</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>404 — Alex Coppola — Filmography</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-        * {
-            line-height: 1.2;
-            margin: 0;
-        }
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-        html {
-            color: #888;
-            display: table;
-            font-family: sans-serif;
-            height: 100%;
-            text-align: center;
-            width: 100%;
-        }
+    <link rel="stylesheet" href="dev/styles/main.css">
+    <!--[if lte IE 9]>
+        <link rel='stylesheet' href='dev/styles/ie.css' type='text/css' media='all' />
+    <![endif]-->
+    <link href='http://fonts.googleapis.com/css?family=Source+Code+Pro:400,600,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
 
-        body {
-            display: table-cell;
-            vertical-align: middle;
-            margin: 2em auto;
-        }
-
-        h1 {
-            color: #555;
-            font-size: 2em;
-            font-weight: 400;
-        }
-
-        p {
-            margin: 0 auto;
-            width: 280px;
-        }
-
-        @media only screen and (max-width: 280px) {
-
-            body, p {
-                width: 95%;
-            }
-
-            h1 {
-                font-size: 1.5em;
-                margin: 0 0 0.3em;
-            }
-
-        }
-
-    </style>
+    <script src="dev/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="dev/js/lazysizes-respimage.min.js" async=""></script>
 </head>
-<body>
-    <h1>Page Not Found</h1>
-    <p>Sorry, but the page you were trying to view does not exist.</p>
+<body class="error404">
+    <div class="error">
+        <div class="error-wrapper">
+            <div class="error-content">
+                <a class="the-end">
+                    <span>The End</span>
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
-<!-- IE needs 512+ bytes: http://blogs.msdn.com/b/ieinternals/archive/2010/08/19/http-error-pages-in-internet-explorer.aspx -->
