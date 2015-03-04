@@ -128,7 +128,7 @@ nav.open #title{
     transition: all $menuTransition cubic-bezier(0.6, -0.28, 0.735, 0.045);
     @include breakpoint(ipad-vert){
         margin-top: (18em / 16) / 2 * -1;
-        top: 50%;
+        top: 50vh;
         font-size: 1.125em;
     }
 }
