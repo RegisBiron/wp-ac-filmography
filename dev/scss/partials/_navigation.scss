@@ -141,6 +141,13 @@ nav.open #title{
         font-weight: 400;
         font-size: (12em / 16);
     }
+    a{
+        transition: all 0.4s ease-in;
+        &:hover{
+            color: #9D9D9D;
+            transition: all 0.4s ease-in;
+        }
+    }
     @include breakpoint(ipad-vert){
         top: 7.25em;
         p{
