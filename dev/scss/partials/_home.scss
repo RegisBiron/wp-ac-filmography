@@ -141,7 +141,7 @@ html.touch{
 
 .is-ff{
     .vid-content img{
-        transition-property: filter, transform;
+        transition-property: transform;
     }
 }
 
@@ -198,7 +198,7 @@ html.touch{
 html.no-touch{
     .is-ff{
         a:hover img{
-            transition-property: filter, transform;
+            transition-property: transform;
         }
     }
 }
