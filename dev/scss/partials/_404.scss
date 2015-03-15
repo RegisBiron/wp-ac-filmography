@@ -1,3 +1,7 @@
+html.touch body.error404{
+    background-color: #000;
+}
+
 .error404{
     #page{
         display: none;
@@ -28,7 +32,7 @@
 }
 
 .the-end{
-    font-size: em(52);
+    font-size: 2.7em;
     text-transform: uppercase;
     color: #FFF;
     font-family: "Source Sans Pro", Helvetica, sans-serif;
