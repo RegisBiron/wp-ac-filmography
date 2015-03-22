@@ -7,6 +7,16 @@ body{
     background-color: #000;
 }
 
+::-moz-selection{
+    color: #000;
+    background-color: #FFF;
+}
+
+::selection{
+    color: #000;
+    background-color: #FFF;
+}
+
 html.touch{
     body{
         background-color: #FFF;

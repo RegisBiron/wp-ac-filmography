@@ -94,7 +94,7 @@ nav.open #title{
     transform: rotate(270deg);
     width: 8em;
     margin-left: (8em / 2) * -1;
-    top: (7em / 2 );
+    top: (7em / 2);
     //easeInBack
     transition: all $menuTransition cubic-bezier(0.6, -0.28, 0.735, 0.045);
     span{
@@ -113,7 +113,7 @@ nav.open #title{
         font-size: 1.5em;
     }
     @include breakpoint(desktop-large){
-        font-size: 1.5vw;
+        font-size: 1.75vw;
     }
 }
 
