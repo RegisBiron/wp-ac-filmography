@@ -12,3 +12,22 @@
         filter: gray;
     }
 }
+
+#ie{
+    background-color: #000;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 90%;
+    padding: 2em 5% 0 5%;
+    z-index: 200;
+    p{
+        color: #FFF;
+    }
+    a{
+        text-decoration: underline;
+        color: #FFF;
+    }
+}
